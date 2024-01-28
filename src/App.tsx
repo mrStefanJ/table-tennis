@@ -1,11 +1,11 @@
-import './App.css';
-import Game from './pages/Game';
-import ScorePage from './pages/ScorePage/ScorePage';
+import "./App.css";
+import PlayerList from "./pages/PlayerList";
+import ScorePage from "./pages/ScorePage/ScorePage";
 
 function App() {
   return (
     <div className="App">
-      <Game />
+      <PlayerList />
       <ScorePage />
     </div>
   );

@@ -5,6 +5,18 @@
 }
 
 .player{
+    display: block;
+    width: 100%;
+}
+
+.player-list{
+    list-style-type: none;
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.player-image{
+    width: 20%;
 }

@@ -2,22 +2,10 @@ import React from "react";
 
 const ScorePage = () => {
   return (
-    <>
-      <table>
-        <tr>
-          <th>Id</th>
-          <th>Player</th>
-          <th>Win</th>
-          <th>Loss</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Maria Anders</td>
-          <td>3</td>
-          <td>2</td>
-        </tr>
-      </table>
-    </>
+    <div>
+      This will be Score page for eachr player to see with who is played and
+      there result.
+    </div>
   );
 };
 
