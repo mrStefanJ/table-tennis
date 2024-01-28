@@ -1,0 +1,13 @@
+.c {
+  display: flex;
+  flex-direction: row;
+}
+
+.p {
+  display: block;
+  img {
+    width: 30%;
+    border-radius: 80px;
+    height: 50%;
+  }
+}

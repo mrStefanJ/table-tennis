@@ -87,7 +87,7 @@ const PlayerList = () => {
   return (
     <div>
       <h2>Players</h2>
-      <div className="player">
+      <div className="players">
         {loading ? (
           "Loading..."
         ) : (
