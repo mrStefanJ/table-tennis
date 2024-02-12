@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { getPlayers } from "../../jasonData/data";
 import { PlayersProps } from "../../jasonData/type";
 import "./style.css";
+import GameRoom from "../../component/gameRoom/GameRoom";
 
 const ChoosePlayer = () => {
   const [players, setPlayers] = useState<PlayersProps[]>([]);
   const [randomPlayers, setRandomPlayers] = useState<PlayersProps[]>([]);
+  const [selectedPlayers, setSelectedPlayers] = useState<PlayersProps[]>([]);
+  const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -35,12 +38,15 @@ const ChoosePlayer = () => {
     }, 1000);
   };
 
-  console.log(randomPlayers);
+  const handleOpenRoom = (player1: PlayersProps, player2: PlayersProps) => {
+    setSelectedPlayers([player1, player2]);
+    setModalOpen(true);
+  };
 
   return (
     <>
       <p>Choose random player</p>
-      <div>
+      <div className="randomPlayers">
         <button onClick={pickRandomPlayers} disabled={loading}>
           {loading ? "Loading..." : "Pick Random Players"}
         </button>
@@ -50,16 +56,35 @@ const ChoosePlayer = () => {
             <div className="c">
               <div className="p">
                 <p>Player 1: {randomPlayers[0].firstName}</p>
-                <img src={randomPlayers[0].image} />
+                <img
+                  src={randomPlayers[0].image}
+                  alt={`Player ${randomPlayers[0].firstName}`}
+                />
               </div>
               <div className="p">
                 <p>Player 2: {randomPlayers[1].firstName}</p>
-                <img src={randomPlayers[1].image} />
+                <img
+                  src={randomPlayers[1].image}
+                  alt={`Player ${randomPlayers[1].firstName}`}
+                />
               </div>
+            </div>
+            <div className="btn-modal">
+              <button
+                className="btn"
+                onClick={() =>
+                  handleOpenRoom(randomPlayers[0], randomPlayers[1])
+                }
+              >
+                Open Modal
+              </button>
             </div>
           </div>
         )}
       </div>
+      {modalOpen && selectedPlayers.length > 0 && (
+        <GameRoom players={selectedPlayers} />
+      )}
     </>
   );
 };

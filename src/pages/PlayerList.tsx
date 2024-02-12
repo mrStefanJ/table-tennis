@@ -2,16 +2,28 @@ import React, { useState, useEffect } from "react";
 import {
   getPlayers,
   addPlayer,
-  updateItem,
-  deleteItem,
+  deletePlayer,
+  selectedPlayer,
 } from "../jasonData/data";
 import { PlayersProps } from "../jasonData/type";
 import "./style.css";
+import {
+  Button,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
+import { Modal } from "../component/playerModal";
 
 const PlayerList = () => {
   const [players, setPlayers] = useState<PlayersProps[]>([]);
   const [newPlayer, setNewPlayer] = useState<PlayersProps>({
-    id: Date.now(),
+    id: uuidv4(),
     firstName: "",
     lastName: "",
     image: "",
@@ -19,6 +31,9 @@ const PlayerList = () => {
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
+  const [selectedPlayerData, setSelectedPlayerData] =
+    useState<PlayersProps | null>(null);
 
   useEffect(() => {
     fetchPlayers();
@@ -74,40 +89,74 @@ const PlayerList = () => {
     }
   };
 
-  // const handleUpdateItem = async (id: number, newName: string) => {
-  //   await updateItem(id, newName);
-  //   fetchItems();
-  // };
+  const handleDeleteItem = (id: number) => {
+    deletePlayer(id);
+    fetchPlayers();
+  };
 
-  // const handleDeleteItem = (id: number) => {
-  //   deleteItem(id);
-  //   fetchItems();
-  // };
+  const fetchPlayerbyID = async (id: string) => {
+    try {
+      const playerData = await selectedPlayer(id);
+      setSelectedPlayerData(playerData);
+      setSelectedPlayerId(id);
+    } catch (error) {
+      console.error("Error fetching player data: ", error);
+    }
+  };
+
+  const closeModal = () => {
+    setSelectedPlayerData(null);
+    setSelectedPlayerId(null);
+  };
 
   return (
-    <div>
-      <h2>Players</h2>
-      <div className="players">
+    <div className="container">
+      <div className="players-list">
+        <h2>Players</h2>
         {loading ? (
           "Loading..."
         ) : (
           <>
-            <ul className="player-list">
-              {players.map((item) => (
-                <li key={item.id}>
-                  <p>
-                    {item.firstName} {item.lastName}
-                  </p>
-                  <img
-                    src={item.image}
-                    alt={`Player image ${item.firstName}`}
-                    className="player-image"
-                  />
-                </li>
-              ))}
-            </ul>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>First Name</TableCell>
+                    <TableCell>Last Name</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {players.map((player) => (
+                    <TableRow key={player.id}>
+                      <TableCell component="th" scope="player">
+                        {player.firstName}
+                      </TableCell>
+                      <TableCell component="th" scope="player">
+                        {player.lastName}
+                      </TableCell>
+                      <TableCell align="right">
+                        <Button
+                          onClick={() => handleDeleteItem(player.id as number)}
+                        >
+                          Delete
+                        </Button>
+                        <Button
+                          onClick={() => fetchPlayerbyID(player.id as string)}
+                        >
+                          Edit
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  {players.length === 0 && <p>Data is empty</p>}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </>
         )}
+      </div>
+      <div className="players-form">
         <form>
           <div className="player-field">
             <input
@@ -151,6 +200,9 @@ const PlayerList = () => {
           </button>
         </form>
       </div>
+      {selectedPlayerId && (
+        <Modal player={selectedPlayerData} onClose={closeModal} />
+      )}
     </div>
   );
 };

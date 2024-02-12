@@ -1,15 +1,42 @@
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
 .players{
     display: block;
-    width: 100%;
+    width: 50%;
 }
 
 .player-list{
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    .image{
+        img{
+            width: 10%;
+            height: 20%;
+        }
+        
+    }
+    .text{
+        font-size: 16px;
+    }
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
 
 .player-image{
     width: 20%;
