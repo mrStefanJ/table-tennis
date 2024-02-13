@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { PlayersProps } from "../../jasonData/type";
 import "./style.css";
 
@@ -24,7 +25,7 @@ const Modal = ({
             <p>Last Name: {player?.lastName}</p>
           </div>
         </div>
-        <button onClick={() => onClose()}>Close</button>
+        <Button onClick={() => onClose()}>Close</Button>
       </div>
     </>
   );

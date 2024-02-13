@@ -3,6 +3,7 @@ import { getPlayers } from "../../jasonData/data";
 import { PlayersProps } from "../../jasonData/type";
 import "./style.css";
 import GameRoom from "../../component/gameRoom/GameRoom";
+import { Button } from "@mui/material";
 
 const ChoosePlayer = () => {
   const [players, setPlayers] = useState<PlayersProps[]>([]);
@@ -43,47 +44,58 @@ const ChoosePlayer = () => {
     setModalOpen(true);
   };
 
+  const closeRoom = () => {
+    setSelectedPlayers([]);
+    setModalOpen(false);
+  };
+
   return (
     <>
       <p>Choose random player</p>
       <div className="randomPlayers">
-        <button onClick={pickRandomPlayers} disabled={loading}>
+        <Button onClick={pickRandomPlayers} disabled={loading}>
           {loading ? "Loading..." : "Pick Random Players"}
-        </button>
+        </Button>
         {randomPlayers.length > 0 && (
           <div>
             <h2>Randomly Picked Players</h2>
-            <div className="c">
-              <div className="p">
-                <p>Player 1: {randomPlayers[0].firstName}</p>
+            <div className="randomPlayers-choosen">
+              <div className="choosen-player">
+                <p className="player-name">
+                  Player 1: {randomPlayers[0].firstName}
+                </p>
                 <img
+                  className="player-image"
                   src={randomPlayers[0].image}
                   alt={`Player ${randomPlayers[0].firstName}`}
                 />
               </div>
-              <div className="p">
-                <p>Player 2: {randomPlayers[1].firstName}</p>
+              <div className="choosen-player">
+                <p className="player-name">
+                  Player 2: {randomPlayers[1].firstName}
+                </p>
                 <img
+                  className="player-image"
                   src={randomPlayers[1].image}
                   alt={`Player ${randomPlayers[1].firstName}`}
                 />
               </div>
             </div>
             <div className="btn-modal">
-              <button
+              <Button
                 className="btn"
                 onClick={() =>
                   handleOpenRoom(randomPlayers[0], randomPlayers[1])
                 }
               >
                 Open Modal
-              </button>
+              </Button>
             </div>
           </div>
         )}
       </div>
       {modalOpen && selectedPlayers.length > 0 && (
-        <GameRoom players={selectedPlayers} />
+        <GameRoom players={selectedPlayers} closeModal={closeRoom} />
       )}
     </>
   );

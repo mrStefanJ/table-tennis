@@ -8,6 +8,7 @@ import {
 import { PlayersProps } from "../jasonData/type";
 import "./style.css";
 import {
+  Box,
   Button,
   Paper,
   Table,
@@ -16,6 +17,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { Modal } from "../component/playerModal";
@@ -69,8 +71,8 @@ const PlayerList = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewPlayer((prev: any) => ({
-      ...prev,
+    setNewPlayer((prevPlayer) => ({
+      ...prevPlayer,
       [name]: value,
     }));
   };
@@ -157,28 +159,31 @@ const PlayerList = () => {
         )}
       </div>
       <div className="players-form">
-        <form>
+        <Box component="form">
           <div className="player-field">
-            <input
-              type="text"
+            <TextField
+              id="player-firsname"
               name="firstName"
+              label="First Name"
+              variant="standard"
               value={newPlayer.firstName}
               onChange={handleChange}
-              placeholder="Enter player first name"
+            />
+
+            {error && <p style={{ color: "red" }}>{error}</p>}
+          </div>
+          <div className="player-field">
+            <TextField
+              id="player-lastname"
+              name="lastName"
+              label="Last Name"
+              variant="standard"
+              value={newPlayer.lastName}
+              onChange={handleChange}
             />
             {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
           <div className="player-field">
-            <input
-              type="text"
-              name="lastName"
-              value={newPlayer.lastName}
-              onChange={handleChange}
-              placeholder="Enter player last name"
-            />
-            {error && <p style={{ color: "red" }}>{error}</p>}
-          </div>
-          <div>
             <input
               type="file"
               accept="image/*"
@@ -186,19 +191,20 @@ const PlayerList = () => {
               placeholder="Upload player image"
             />
           </div>
-          <div>
-            <input
-              type="text"
+          <div className="player-field">
+            <TextField
+              id="player-title"
               name="title"
+              label="Player Title"
+              variant="standard"
               value={newPlayer.title}
               onChange={handleChange}
-              placeholder="Enter player title"
             />
           </div>
-          <button type="button" onClick={handleAddPlayer}>
+          <Button type="button" onClick={handleAddPlayer}>
             Add Player
-          </button>
-        </form>
+          </Button>
+        </Box>
       </div>
       {selectedPlayerId && (
         <Modal player={selectedPlayerData} onClose={closeModal} />

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import "./style.css";
+import { Button, TextField } from "@mui/material";
 
-const GameRoom = ({ players }: { players: any }) => {
+const GameRoom = ({
+  players,
+  closeModal,
+}: {
+  players: any;
+  closeModal: () => void;
+}) => {
   console.log(players);
   const [chosenPlayers, setChosenPlayers] = useState(players);
   const [gameResults, setGameResults] = useState<Array<string>>([]);
@@ -47,7 +54,7 @@ const GameRoom = ({ players }: { players: any }) => {
           {[...Array(5)].map((_, index) => (
             <td key={index}>
               {chosenPlayers.map((player: any) => (
-                <input
+                <TextField
                   key={player.id}
                   name={`player ${player.id} set ${index + 1}`}
                   className="input-size"
@@ -65,6 +72,7 @@ const GameRoom = ({ players }: { players: any }) => {
           </div>
         ))}
       </div>
+      <Button onClick={() => closeModal}>Cancel</Button>
     </div>
   );
 };

@@ -18,6 +18,7 @@
 
 .border-result{
     width: 50%;
+    margin: 0 25px;
     .input-size{
         width: 100px;
     }
