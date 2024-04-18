@@ -39,7 +39,7 @@ export const updatePlayer = async (id: string, playerData: PlayersProps) => {
   }
 };
 // delete player
-export const deletePlayer = async (playerId: number) => {
+export const deletePlayer = async (playerId: string) => {
   try {
     const response = await axios.delete(`${API_BASE_URL}/players/${playerId}`);
     return response.data;
@@ -49,8 +49,10 @@ export const deletePlayer = async (playerId: number) => {
 };
 
 // save match
-export const matchPlayed = async () => {
+export const saveMatch = async (gameMatch: any) => {
   try {
+    const response = await axios.post(`${API_BASE_URL}/game/`, gameMatch);
+    return response;
   } catch (error) {
     console.error("Error in saving match: ", error);
   }

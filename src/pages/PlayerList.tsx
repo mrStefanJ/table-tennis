@@ -1,10 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {
-  getPlayers,
-  addPlayer,
-  deletePlayer,
-  selectedPlayer,
-} from "../jasonData/data";
+import { useState, useEffect } from "react";
+import { getPlayers, deletePlayer, selectedPlayer } from "../jasonData/data";
 import { PlayersProps } from "../jasonData/type";
 import "./style.css";
 import {
@@ -17,22 +12,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
 } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
-import { Modal } from "../component/playerModal";
+import { Modal as PlayerInfo } from "../component/Modal/playerInfo";
+import { ModalCreate } from "../component/Modal/playerCreate";
+import { ModalDelete } from "../component/Modal/playerDelete";
 
 const PlayerList = () => {
   const [players, setPlayers] = useState<PlayersProps[]>([]);
-  const [newPlayer, setNewPlayer] = useState<PlayersProps>({
-    id: uuidv4(),
-    firstName: "",
-    lastName: "",
-    image: "",
-    title: "",
-  });
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
   const [selectedPlayerData, setSelectedPlayerData] =
     useState<PlayersProps | null>(null);
@@ -47,55 +36,6 @@ const PlayerList = () => {
     setPlayers(data);
   };
 
-  const handleAddPlayer = async () => {
-    try {
-      if (!newPlayer.firstName.trim() || !newPlayer.lastName.trim()) {
-        setError("First name and last name must not be empty!!!");
-        return;
-      }
-      setError("");
-
-      await addPlayer(newPlayer);
-      setNewPlayer({
-        id: Date.now(),
-        firstName: "",
-        lastName: "",
-        image: "",
-        title: "",
-      });
-      fetchPlayers();
-    } catch (error) {
-      console.error("Error adding new player: ", error);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setNewPlayer((prevPlayer) => ({
-      ...prevPlayer,
-      [name]: value,
-    }));
-  };
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setNewPlayer((prevPlayer) => ({
-          ...prevPlayer,
-          image: reader.result as string,
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleDeleteItem = (id: number) => {
-    deletePlayer(id);
-    fetchPlayers();
-  };
-
   const fetchPlayerbyID = async (id: string) => {
     try {
       const playerData = await selectedPlayer(id);
@@ -105,6 +45,12 @@ const PlayerList = () => {
       console.error("Error fetching player data: ", error);
     }
   };
+
+  const openCreaterModal = () => setOpenModal(true);
+  const closeCreaterModal = () => setOpenModal(false);
+
+  const openDeleteModal = () => setOpenModalDelete(true);
+  const closeDeleteModal = () => setOpenModalDelete(false);
 
   const closeModal = () => {
     setSelectedPlayerData(null);
@@ -138,15 +84,18 @@ const PlayerList = () => {
                         {player.lastName}
                       </TableCell>
                       <TableCell align="right">
-                        <Button
-                          onClick={() => handleDeleteItem(player.id as number)}
-                        >
-                          Delete
-                        </Button>
+                        <Button onClick={openDeleteModal}>Delete</Button>
+                        {openModalDelete && (
+                          <ModalDelete
+                            onClose={closeDeleteModal}
+                            playerId={player.id as string}
+                            fetchPlayers={fetchPlayers}
+                          />
+                        )}
                         <Button
                           onClick={() => fetchPlayerbyID(player.id as string)}
                         >
-                          Edit
+                          Info
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -158,56 +107,19 @@ const PlayerList = () => {
           </>
         )}
       </div>
-      <div className="players-form">
-        <Box component="form">
-          <div className="player-field">
-            <TextField
-              id="player-firsname"
-              name="firstName"
-              label="First Name"
-              variant="standard"
-              value={newPlayer.firstName}
-              onChange={handleChange}
-            />
-
-            {error && <p style={{ color: "red" }}>{error}</p>}
-          </div>
-          <div className="player-field">
-            <TextField
-              id="player-lastname"
-              name="lastName"
-              label="Last Name"
-              variant="standard"
-              value={newPlayer.lastName}
-              onChange={handleChange}
-            />
-            {error && <p style={{ color: "red" }}>{error}</p>}
-          </div>
-          <div className="player-field">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              placeholder="Upload player image"
-            />
-          </div>
-          <div className="player-field">
-            <TextField
-              id="player-title"
-              name="title"
-              label="Player Title"
-              variant="standard"
-              value={newPlayer.title}
-              onChange={handleChange}
-            />
-          </div>
-          <Button type="button" onClick={handleAddPlayer}>
-            Add Player
-          </Button>
+      <div>
+        <Box>
+          <Button onClick={openCreaterModal}>Add New Player</Button>
         </Box>
+        {openModal && (
+          <ModalCreate
+            fetchPlayers={fetchPlayers}
+            closeCreaterModal={closeCreaterModal}
+          />
+        )}
       </div>
       {selectedPlayerId && (
-        <Modal player={selectedPlayerData} onClose={closeModal} />
+        <PlayerInfo player={selectedPlayerData} onClose={closeModal} />
       )}
     </div>
   );
