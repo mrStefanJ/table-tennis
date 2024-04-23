@@ -1,0 +1,78 @@
+.players-form {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  width: 60%;
+  background: white;
+  z-index: 1;
+  border-radius: 30px;
+  box-shadow: 8px 10px 24px #fdd55f;
+  padding: 20px;
+}
+
+.input-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 200px;
+  height: 330px;
+}
+
+.player-field {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.player-field .MuiInput-root:before {
+  border-bottom: 2px solid #fdd55f !important;
+}
+
+.player-field .MuiInput-root:after {
+  border-bottom: 2px solid #fdd55f !important;
+}
+
+.player-field .MuiInput-root:focus {
+  border-bottom: 2px solid #fdd55f !important;
+}
+
+.player-field .MuiTextField-root label {
+  color: #000000;
+}
+
+.player-field .image-field {
+  color: #ffffff;
+}
+
+.player-field .MuiInput-root:focus {
+  border-bottom: 2px solid #fdd55f !important;
+}
+
+.MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
+  border-bottom: 2px solid #fdd55f !important;
+}
+
+.MuiInput-root:hover:not(.Mui-disabled, .Mui-error):after {
+  border-bottom: 2px solid #fdd55f !important;
+}
+
+.MuiInput-root.Mui-focused {
+  border-bottom: 2px solid #fdd55f !important;
+}
+
+.button-action {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 20px 0;
+}
