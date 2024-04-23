@@ -9,6 +9,26 @@
     width: 50%;
 }
 
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+
+    & h2 {
+        color: #ffffff;
+    }
+    & button {
+        color: #ffffff;
+        text-transform: none;
+        border: 2px solid #fdd55f;
+
+        &:hover{
+            background-color: #fdd55f;
+        }
+    }
+}
+
 .player-list{
     .image{
         img{
@@ -34,9 +54,9 @@ table {
     padding: 8px;
   }
   
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
+  /* tr:nth-child(even) {
+    background-color: #13135c;
+  } */
 
 
 .player-image{

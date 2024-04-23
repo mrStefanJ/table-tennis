@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { getPlayers, deletePlayer, selectedPlayer } from "../jasonData/data";
-import { PlayersProps } from "../jasonData/type";
+import { Player } from "../jasonData/type";
 import "./style.css";
 import {
   Box,
   Button,
+  Modal,
   Paper,
   Table,
   TableBody,
@@ -18,13 +19,14 @@ import { ModalCreate } from "../component/Modal/playerCreate";
 import { ModalDelete } from "../component/Modal/playerDelete";
 
 const PlayerList = () => {
-  const [players, setPlayers] = useState<PlayersProps[]>([]);
+  const [players, setPlayers] = useState<Player[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
-  const [selectedPlayerData, setSelectedPlayerData] =
-    useState<PlayersProps | null>(null);
+  const [selectedPlayerData, setSelectedPlayerData] = useState<Player | null>(
+    null
+  );
 
   useEffect(() => {
     fetchPlayers();
@@ -60,7 +62,20 @@ const PlayerList = () => {
   return (
     <div className="container">
       <div className="players-list">
-        <h2>Players</h2>
+        <div className="header">
+          <h2>Players</h2>
+          <div className="btn__player-add">
+            <Box>
+              <Button onClick={openCreaterModal}>Add New Player</Button>
+            </Box>
+            {openModal && (
+              <ModalCreate
+                fetchPlayers={fetchPlayers}
+                closeCreaterModal={closeCreaterModal}
+              />
+            )}
+          </div>
+        </div>
         {loading ? (
           "Loading..."
         ) : (
@@ -105,17 +120,6 @@ const PlayerList = () => {
               </Table>
             </TableContainer>
           </>
-        )}
-      </div>
-      <div>
-        <Box>
-          <Button onClick={openCreaterModal}>Add New Player</Button>
-        </Box>
-        {openModal && (
-          <ModalCreate
-            fetchPlayers={fetchPlayers}
-            closeCreaterModal={closeCreaterModal}
-          />
         )}
       </div>
       {selectedPlayerId && (
