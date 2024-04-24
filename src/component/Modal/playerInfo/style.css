@@ -2,12 +2,13 @@
     display: block;
     position: absolute;
     top: 22%;
-    left: 30%;
-    box-shadow: 2px 2px 11px 2px grey;
+    left: 15%;
+    box-shadow: 2px 2px 11px 2px #808080;
     border-radius: 20px;
-    width: 40%;
+    width: 50%;
     height: 60%;
-    background: white;
+    background: #ffffff;
+    z-index: 1;
 }
 
 .player-profile {

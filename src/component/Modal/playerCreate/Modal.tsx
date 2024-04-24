@@ -9,16 +9,16 @@ import styled from "@emotion/styled";
 
 // Custom styled button
 const CustomButton = styled(Button)({
-  backgroundColor: "#fdd55f",
-  color: "#fff",
+  backgroundColor: "#fff",
+  color: "#fdd55f",
   border: "1px solid #fdd55f",
   padding: "10px 20px",
   cursor: "pointer",
   transition: "background-color 0.3s, color 0.3s",
   "&:hover": {
-    backgroundColor: "#fff",
+    backgroundColor: "#fdd55f",
     borderColor: "#fdd55f",
-    color: "#fdd55f",
+    color: "#fff",
   },
 });
 
@@ -39,6 +39,7 @@ const ModalCreate = ({
   const [firstNameError, setfirstNameError] = useState<string>("");
   const [lastNameError, setLastNameError] = useState<string>("");
   const [imageError, setImageError] = useState<string>("");
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setNewPlayer((prevPlayer) => ({

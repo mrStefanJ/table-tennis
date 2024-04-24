@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import "./style.css";
 import { deletePlayer, getPlayers } from "../../../jasonData/data";
 
@@ -17,15 +17,22 @@ const ModalDelete = ({
     onClose();
   };
   return (
-    <>
-      <div className="player-modal">
+    <Modal open>
+      <Box className="player-modal">
         <h2>Are you sure, you want to delete player</h2>
-        <div className="actine-delete-player">
-          <Button onClick={() => handleDeleteItem(playerId)}>Delete</Button>
-          <Button onClick={() => onClose()}>Close</Button>
+        <div className="btn__action">
+          <Button
+            className="btn-delete"
+            onClick={() => handleDeleteItem(playerId)}
+          >
+            Delete
+          </Button>
+          <Button className="btn-cancel" onClick={() => onClose()}>
+            Close
+          </Button>
         </div>
-      </div>
-    </>
+      </Box>
+    </Modal>
   );
 };
 
