@@ -11,7 +11,8 @@ body {
   align-items: center;
   background-image: url("./assets/table-tennis.png");
   background-size: cover;
-  background-repeat: round;
+  height: 100%;
+  background-repeat: no-repeat;
 }
 
 code {

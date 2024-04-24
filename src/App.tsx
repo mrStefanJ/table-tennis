@@ -6,9 +6,11 @@ import ScorePage from "./pages/ScorePage/ScorePage";
 function App() {
   return (
     <div className="App">
-      <PlayerList />
-      <ChoosePlayer />
-      <ScorePage />
+      <div className="App_background">
+        <PlayerList />
+        <ChoosePlayer />
+        <ScorePage />
+      </div>
     </div>
   );
 }
