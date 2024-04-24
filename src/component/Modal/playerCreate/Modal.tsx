@@ -49,6 +49,7 @@ const ModalCreate = ({
   };
 
   const handleAddPlayer = async () => {
+    debugger;
     try {
       if (!newPlayer.firstName.trim() || !newPlayer.lastName.trim()) {
         setfirstNameError("First name and must not be empty!!!");
@@ -56,7 +57,12 @@ const ModalCreate = ({
         return;
       }
 
-      await addPlayer(newPlayer);
+      const playerWithDefaultImage = {
+        ...newPlayer,
+        image: newPlayer.image ? newPlayer.image : DefaultImage,
+      };
+
+      await addPlayer(playerWithDefaultImage);
       setNewPlayer({
         id: Date.now(),
         firstName: "",
@@ -89,8 +95,6 @@ const ModalCreate = ({
       setImageError("");
     }
   };
-
-  // NEED TO WRITE A FUNCTION FOR Validation
 
   return (
     <Modal open>
