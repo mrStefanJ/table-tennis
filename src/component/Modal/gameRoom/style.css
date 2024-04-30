@@ -1,0 +1,29 @@
+.modal-room {
+  width: 880px;
+  height: 400px;
+  position: absolute;
+  top: 20%;
+  left: 4%;
+  background-color: #d3cccc;
+  color: #ffffff;
+  border-radius: 30px;
+  box-shadow: -2px -1px 12px #676666;
+}
+
+.players {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.border-result {
+  width: 50%;
+  margin: 0 25px;
+  .input-size {
+    width: 100px;
+  }
+}
+
+.input-size{
+  margin: 10px 0;
+}
