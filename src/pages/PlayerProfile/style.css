@@ -1,0 +1,36 @@
+.player__info{
+    width: 600px;
+    height: auto;
+    background: #ffffff;
+}
+
+.player-profile {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.player-image{
+    width: 100%;
+    img{
+        width: 100px;
+    }
+}
+
+.player-info{
+    display: flex;
+    flex-direction: column;
+
+    & > p {
+        margin: 0;
+    }
+}
+
+.btn-goBack{
+    color: #fdd55f;
+    border: 2px solid #fdd55f;
+    text-decoration: none;
+    &:hover {
+      background-color: #fdd55f;
+      color: #ffffff;
+    }
+}
