@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getPlayers } from "../../jasonData/data";
-import { PlayersProps } from "../../jasonData/type";
+import { Player } from "../../jasonData/type";
 import "./style.css";
-import GameRoom from "../../component/gameRoom/GameRoom";
-import { Button } from "@mui/material";
+import GameRoom from "../../component/Modal/gameRoom/GameRoom";
+import { Box, Button } from "@mui/material";
 
 const ChoosePlayer = () => {
-  const [players, setPlayers] = useState<PlayersProps[]>([]);
-  const [randomPlayers, setRandomPlayers] = useState<PlayersProps[]>([]);
-  const [selectedPlayers, setSelectedPlayers] = useState<PlayersProps[]>([]);
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [randomPlayers, setRandomPlayers] = useState<Player[]>([]);
+  const [selectedPlayers, setSelectedPlayers] = useState<Player[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +39,7 @@ const ChoosePlayer = () => {
     }, 1000);
   };
 
-  const handleOpenRoom = (player1: PlayersProps, player2: PlayersProps) => {
+  const handleOpenRoom = (player1: Player, player2: Player) => {
     setSelectedPlayers([player1, player2]);
     setModalOpen(true);
   };
@@ -50,15 +50,21 @@ const ChoosePlayer = () => {
   };
 
   return (
-    <>
-      <p>Choose random player</p>
+    <div className="container_random-player">
       <div className="randomPlayers">
-        <Button onClick={pickRandomPlayers} disabled={loading}>
+        <Button
+          onClick={pickRandomPlayers}
+          disabled={loading || players.length < 2}
+        >
           {loading ? "Loading..." : "Pick Random Players"}
         </Button>
-        {randomPlayers.length > 0 && (
+        {randomPlayers.length === 0 ? (
+          <Box className="text">
+            <p>Choose random player</p>
+          </Box>
+        ) : (
           <div>
-            <h2>Randomly Picked Players</h2>
+            <h2 className="title">Randomly Picked Players</h2>
             <div className="randomPlayers-choosen">
               <div className="choosen-player">
                 <p className="player-name">
@@ -97,7 +103,7 @@ const ChoosePlayer = () => {
       {modalOpen && selectedPlayers.length > 0 && (
         <GameRoom players={selectedPlayers} closeModal={closeRoom} />
       )}
-    </>
+    </div>
   );
 };
 

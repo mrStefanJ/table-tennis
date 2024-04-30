@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getPlayers, deletePlayer, selectedPlayer } from "../jasonData/data";
 import { Player } from "../jasonData/type";
 import "./style.css";
@@ -11,25 +11,28 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
+  TablePagination,
   TableRow,
 } from "@mui/material";
-import { Modal as PlayerInfo } from "../component/Modal/playerInfo";
 import { ModalCreate } from "../component/Modal/playerCreate";
 import { ModalDelete } from "../component/Modal/playerDelete";
+import { Link } from "react-router-dom";
 
 const PlayerList = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
-  const [selectedPlayerData, setSelectedPlayerData] = useState<Player | null>(
-    null
-  );
+  const initialized = useRef(false);
 
   useEffect(() => {
-    fetchPlayers();
+    if (!initialized.current) {
+      initialized.current = true;
+
+      fetchPlayers();
+    }
   }, []);
 
   const fetchPlayers = async () => {
@@ -38,25 +41,28 @@ const PlayerList = () => {
     setPlayers(data);
   };
 
-  const fetchPlayerbyID = async (id: string) => {
-    try {
-      const playerData = await selectedPlayer(id);
-      setSelectedPlayerData(playerData);
-      setSelectedPlayerId(id);
-    } catch (error) {
-      console.error("Error fetching player data: ", error);
-    }
-  };
-
   const openCreaterModal = () => setOpenModal(true);
   const closeCreaterModal = () => setOpenModal(false);
 
   const openDeleteModal = () => setOpenModalDelete(true);
   const closeDeleteModal = () => setOpenModalDelete(false);
 
-  const closeModal = () => {
-    setSelectedPlayerData(null);
-    setSelectedPlayerId(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   return (
@@ -90,16 +96,27 @@ const PlayerList = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {players.map((player) => (
+                  {(rowsPerPage > 0
+                    ? players.slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                    : players
+                  ).map((player) => (
                     <TableRow key={player.id}>
-                      <TableCell component="th" scope="player">
+                      <TableCell component="th" scope="row">
                         {player.firstName}
                       </TableCell>
-                      <TableCell component="th" scope="player">
+                      <TableCell style={{ width: 160 }} align="right">
                         {player.lastName}
                       </TableCell>
-                      <TableCell align="right">
-                        <Button onClick={openDeleteModal}>Delete</Button>
+                      <TableCell style={{ width: 160 }} align="right">
+                        <Button
+                          onClick={openDeleteModal}
+                          className="btn delete"
+                        >
+                          Delete
+                        </Button>
                         {openModalDelete && (
                           <ModalDelete
                             onClose={closeDeleteModal}
@@ -107,24 +124,48 @@ const PlayerList = () => {
                             fetchPlayers={fetchPlayers}
                           />
                         )}
-                        <Button
-                          onClick={() => fetchPlayerbyID(player.id as string)}
+                        <Link
+                          key={player.id}
+                          to={`profile/${player.id}`}
+                          className="btn profile"
                         >
-                          Info
-                        </Button>
+                          Profile
+                        </Link>
                       </TableCell>
                     </TableRow>
                   ))}
-                  {players.length === 0 && <p>Data is empty</p>}
                 </TableBody>
+                <TableFooter>
+                  <TableRow>
+                    <TablePagination
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        { label: "All", value: -1 },
+                      ]}
+                      colSpan={3}
+                      count={players.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      slotProps={{
+                        select: {
+                          inputProps: {
+                            "aria-label": "rows per page",
+                          },
+                          native: true,
+                        },
+                      }}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                  </TableRow>
+                </TableFooter>
               </Table>
             </TableContainer>
           </>
         )}
       </div>
-      {selectedPlayerId && (
-        <PlayerInfo player={selectedPlayerData} onClose={closeModal} />
-      )}
     </div>
   );
 };

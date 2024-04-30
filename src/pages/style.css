@@ -1,64 +1,88 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
 }
 
-.players{
-    display: block;
-    width: 50%;
+.players {
+  display: block;
+  width: 50%;
 }
 
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
 
-    & h2 {
-        color: #ffffff;
-    }
-    & button {
-        color: #ffffff;
-        text-transform: none;
-        border: 2px solid #fdd55f;
+  & h2 {
+    color: #000000;
+  }
+  & button {
+    color: #fdd55f;
+    text-transform: none;
+    border: 2px solid #fdd55f;
 
-        &:hover{
-            background-color: #fdd55f;
-        }
+    &:hover {
+      background-color: #fdd55f;
+      color: #ffffff;
     }
+  }
 }
 
-.player-list{
-    .image{
-        img{
-            width: 10%;
-            height: 20%;
-        }
-        
+.player-list {
+  .image {
+    img {
+      width: 10%;
+      height: 20%;
     }
-    .text{
-        font-size: 16px;
-    }
+  }
+  .text {
+    font-size: 16px;
+  }
 }
 
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  /* tr:nth-child(even) {
-    background-color: #13135c;
-  } */
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
 
-.player-image{
-    width: 20%;
+.player-image {
+  width: 20%;
+}
+
+.btn {
+  min-width: 64px;
+  padding: 6px 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  line-height: 1.75;
+}
+
+.profile {
+  color: #fdd55f;
+  border: 2px solid #fdd55f;
+
+  &:hover {
+    background-color: #fdd55f;
+    color: #ffffff;
+  }
+}
+
+.MuiButton-root.delete {
+  color: #f80e18;
+  border: 2px solid #f80e18;
+  &:hover {
+    background-color: #f80e18;
+    color: #ffffff;
+  }
 }

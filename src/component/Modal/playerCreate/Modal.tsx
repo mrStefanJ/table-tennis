@@ -49,7 +49,6 @@ const ModalCreate = ({
   };
 
   const handleAddPlayer = async () => {
-    debugger;
     try {
       if (!newPlayer.firstName.trim() || !newPlayer.lastName.trim()) {
         setfirstNameError("First name and must not be empty!!!");

@@ -1,7 +1,19 @@
+.container_random-player {
+  height: 400px;
+  padding-top: 20px;
+}
+
 .randomPlayers-choosen {
   display: flex;
-    flex-direction: row;
-    justify-content: center;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.title {
+  background: linear-gradient(45deg, black, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .choosen-player {
@@ -10,10 +22,10 @@
 }
 
 .choosen-player .player-name {
-  font-size: 14px;;
+  font-size: 14px;
 }
 
-.choosen-player .player-image{
+.choosen-player .player-image {
   height: 200px;
-    width: 200px;
+  width: 200px;
 }
