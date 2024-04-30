@@ -9,13 +9,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url("./assets/table-tennis.png");
-  background-size: cover;
+  background: url("./assets/table-tennis.png") no-repeat center;
   height: 100%;
-  background-repeat: no-repeat;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
