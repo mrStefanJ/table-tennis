@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PlayersProps } from "./type";
+import { Game, Player } from "./type";
 
 const API_BASE_URL = "http://localhost:8000";
 
@@ -9,7 +9,7 @@ export const getPlayers = async () => {
   return response.data;
 };
 // create player
-export const addPlayer = async (playerData: PlayersProps) => {
+export const addPlayer = async (playerData: Player) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/players`, playerData);
     return response.data;
@@ -27,7 +27,7 @@ export const selectedPlayer = async (id: string) => {
   }
 };
 // update player
-export const updatePlayer = async (id: string, playerData: PlayersProps) => {
+export const updatePlayer = async (id: string, playerData: Player) => {
   try {
     const response = await axios.put(
       `${API_BASE_URL}/players/${id}`,
@@ -49,7 +49,7 @@ export const deletePlayer = async (playerId: string) => {
 };
 
 // save match
-export const saveMatch = async (gameMatch: any) => {
+export const saveMatch = async (gameMatch: Game) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/game/`, gameMatch);
     return response;
@@ -58,4 +58,12 @@ export const saveMatch = async (gameMatch: any) => {
   }
 };
 
-// fetch all matchs that are played
+// fetch all matches
+export const featchMatchs = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/game`);
+    return response;
+  } catch (error) {
+    console.error("Error in fetching matchs: ", error);
+  }
+};
