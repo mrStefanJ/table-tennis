@@ -1,0 +1,43 @@
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.nav__text {
+    margin: 10px;
+    color: #000000;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav__text::before,
+.nav__text::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #4343ce;
+    transition: width 0.3s ease;
+}
+
+.nav__text::before {
+    left: 0;
+}
+
+.nav__text::after {
+    right: 0;
+}
+
+.nav__text:hover {
+    color: #4343ce;
+}
+
+.nav__text:hover::before,
+.nav__text:hover::after {
+    width: 50%;
+}
