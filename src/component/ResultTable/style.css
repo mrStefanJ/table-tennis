@@ -1,0 +1,64 @@
+.container-result{
+    background: #ffffff;
+    width: 720px;
+    padding-bottom: 40px;
+}
+
+.MuiBox-root{
+  padding: 10px 5px;
+}
+
+.btn-back{
+  margin: 10px;
+  color: #000000;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-back::before,
+.btn-back::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #4343ce;
+    transition: width 0.3s ease;
+}
+
+.btn-back::before {
+    left: 0;
+}
+
+.btn-back::after {
+    right: 0;
+}
+
+.btn-back:hover {
+    color: #4343ce;
+}
+
+.btn-back:hover::before,
+.btn-back:hover::after {
+    width: 50%;
+}
+
+.result-sets {
+  list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    li{
+      text-align: center;
+    }
+}
+
+.MuiAccordion-root{
+  width: 90%;
+}
+
+.container--table{
+  padding: 20px 0;
+}

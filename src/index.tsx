@@ -5,6 +5,8 @@ import "./index.css";
 import App from "./App";
 import Profile from "./pages/PlayerProfile/Profile";
 import NotFoundPage from "./pages/NotFoundPage";
+import ResultTable from "./component/ResultTable/ResultTable";
+import Standings from "./pages/Standings/Standings";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,16 @@ const router = createBrowserRouter([
   {
     path: "/profile/:playerId",
     element: <Profile />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/result",
+    element: <ResultTable />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/standings",
+    element: <Standings />,
     errorElement: <NotFoundPage />,
   },
 ]);

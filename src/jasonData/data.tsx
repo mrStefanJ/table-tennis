@@ -61,7 +61,7 @@ export const saveMatch = async (gameMatch: Game) => {
 // fetch all matches
 export const featchMatchs = async () => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/game`);
+    const response = await axios.get(`${API_BASE_URL}/game`);
     return response;
   } catch (error) {
     console.error("Error in fetching matchs: ", error);

@@ -55,12 +55,13 @@ const ChoosePlayer = () => {
         <Button
           onClick={pickRandomPlayers}
           disabled={loading || players.length < 2}
+          className="btn"
         >
           {loading ? "Loading..." : "Pick Random Players"}
         </Button>
         {randomPlayers.length === 0 ? (
           <Box className="text">
-            <p>Choose random player</p>
+            <p>You dind't choose random players</p>
           </Box>
         ) : (
           <div>

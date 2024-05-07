@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { getPlayers, deletePlayer, selectedPlayer } from "../jasonData/data";
+import { getPlayers } from "../jasonData/data";
 import { Player } from "../jasonData/type";
 import "./style.css";
 import {
   Box,
   Button,
-  Modal,
   Paper,
   Table,
   TableBody,
@@ -71,7 +70,7 @@ const PlayerList = () => {
         <div className="header">
           <h2>Players</h2>
           <div className="btn__player-add">
-            <Box>
+            <Box className="btn__add-player">
               <Button onClick={openCreaterModal}>Add New Player</Button>
             </Box>
             {openModal && (
