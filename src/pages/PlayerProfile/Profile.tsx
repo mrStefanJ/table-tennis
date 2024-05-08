@@ -3,46 +3,66 @@ import { selectedPlayer } from "../../jasonData/data";
 import { useEffect, useState } from "react";
 import { Player } from "../../jasonData/type";
 import "./style.css";
+import { Box, Button, Modal } from "@mui/material";
+import { ModalEdit } from "../../component/Modal/playerEdit";
+import Footer from "../../component/Footer/Footer";
 
 const Profile = () => {
   const params = useParams<{ playerId: string }>();
   const [player, setPlayer] = useState<Player>();
+  const [openModal, setOpenModal] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      const data = await selectedPlayer(params.playerId as string);
+      setPlayer(data);
+    } catch (error) {
+      console.error("Error fetching player data: ", error);
+    }
+  };
+
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => {
+    setOpenModal(false);
+    fetchData();
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await selectedPlayer(params.playerId as string);
-        setPlayer(data);
-      } catch (error) {
-        console.error("Error fetching player data: ", error);
-      }
-    };
-
     fetchData();
-  }, [params.playerId]);
+  }, []);
 
   if (!player) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="player__info">
-      <Link to="/" className="btn-goBack">
-        Go Back
-      </Link>
-      <h3 style={{ color: "blue", fontSize: "16px", fontWeight: "bold" }}>
-        Player profile
-      </h3>
-      <div className="player-profile">
-        <div className="player-image">
-          <img src={player?.image} alt={player?.firstName} />
-        </div>
-        <div className="player-info">
-          <p>Player ID: {player?.id}</p>
-          <p>First Name: {player?.firstName}</p>
-          <p>Last Name: {player?.lastName}</p>
-        </div>
+    <>
+      <div className="player__info">
+        <Link to="/" className="player-info__btn-back">
+          Go Back
+        </Link>
+        <h2 className="player-info__title">Player profile</h2>
+        <Box className="player-info__profile">
+          <div className="player-info__image">
+            <img src={player?.image} alt={player?.firstName} />
+          </div>
+          <div className="player-info__details">
+            <p className="player-info__detail">Player ID: {player?.id}</p>
+            <p className="player-info__detail">
+              First Name: {player?.firstName}
+            </p>
+            <p className="player-info__detail">Last Name: {player?.lastName}</p>
+            <p className="player-info__detail">Title: {player?.title}</p>
+          </div>
+        </Box>
+        <Box className="player-info__btn">
+          <Button className="player-info__btn-edit" onClick={handleOpen}>
+            Edit Profile
+          </Button>
+        </Box>
+        {openModal && <ModalEdit handleClose={handleClose} player={player} />}
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

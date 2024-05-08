@@ -1,37 +1,82 @@
-.player__info{
-    width: 600px;
-    height: auto;
-    background: #ffffff;
-    padding-bottom: 30px;
+.player__info {
+  width: 720px;
+  height: auto;
+  background: #ffffff;
+  padding-bottom: 30px;
 }
 
-.player-profile {
-    text-align: left;
+.player-info__title {
+  padding-left: 30px;
+  color: #4343ce;
+  font-weight: bold;
+}
+
+.player-info__profile.MuiBox-root{
+  text-align: left;
+  padding-left: 30px;
+}
+
+.player-info__image {
+  width: 100%;
+  img {
+    width: 280px;
+    height: 250px;
+  }
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-info__btn-back {
+  margin: 10px;
+  color: #000000;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.player-info__btn-back::before,
+.player-info__btn-back::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #4343ce;
+  transition: width 0.3s ease;
+}
+
+.player-info__btn-back::before {
+  left: 0;
+}
+
+.player-info__btn-back::after {
+  right: 0;
+}
+
+.player-info__btn-back:hover {
+  color: #4343ce;
+}
+
+.player-info__btn-back:hover::before,
+.player-info__btn-back:hover::after {
+  width: 50%;
+}
+
+.player-info__btn.MuiBox-root{
     padding-left: 30px;
 }
 
-.player-image{
-    width: 100%;
-    img{
-        width: 100px;
-    }
+.player-info__btn .player-info__btn-edit {
+    color: #4343ce;
+    text-transform: none;
+    border: 2px solid #4343ce;
 }
 
-.player-info{
-    display: flex;
-    flex-direction: column;
-
-    & > p {
-        margin: 0;
-    }
-}
-
-.btn-goBack{
-    color: #fdd55f;
-    border: 2px solid #fdd55f;
-    text-decoration: none;
-    &:hover {
-      background-color: #fdd55f;
-      color: #ffffff;
-    }
+.player-info__btn .player-info__btn-edit:hover {
+    background-color: #4343ce;
+    color: #ffffff;
 }
