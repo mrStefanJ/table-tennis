@@ -1,4 +1,5 @@
 import "./App.css";
+import Footer from "./component/Footer/Footer";
 import Header from "./component/Header/Header";
 import ChoosePlayer from "./pages/ChooseRandomPlayer/ChoosePlayer";
 import PlayerList from "./pages/PlayerList";
@@ -11,6 +12,7 @@ function App() {
         <PlayerList />
         <ChoosePlayer />
       </div>
+      <Footer />
     </div>
   );
 }
