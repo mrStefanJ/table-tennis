@@ -12,6 +12,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
+import Footer from "../../component/Footer/Footer";
 
 const Standings = () => {
   const [matchs, setMatchs] = useState<any>([]);
@@ -25,13 +26,13 @@ const Standings = () => {
     setMatchs(data);
   };
 
-  console.log(matchs);
   return (
-    <div className="container-result">
-      <Link to="/" className="btn-back">
-        Go Back
-      </Link>
-      {/*<div className="container--table">
+    <>
+      <div className="container-result">
+        <Link to="/" className="btn-back">
+          Go Back
+        </Link>
+        {/*<div className="container--table">
         <h2>Standings Result</h2>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -49,8 +50,10 @@ const Standings = () => {
           </Table>
         </TableContainer>
       </div> */}
-      <h1>In progress</h1>
-    </div>
+        <h1>In progress</h1>
+      </div>
+      <Footer />
+    </>
   );
 };
 
