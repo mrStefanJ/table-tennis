@@ -26,8 +26,8 @@ export const selectedPlayer = async (id: string) => {
     console.error("Can not fetch player by id!!!");
   }
 };
-// update player
-export const updatePlayer = async (id: string, playerData: Player) => {
+// edit player
+export const editPlayer = async (id: string, playerData: Player) => {
   try {
     const response = await axios.put(
       `${API_BASE_URL}/players/${id}`,
@@ -47,7 +47,6 @@ export const deletePlayer = async (playerId: string) => {
     console.error("Error deleting player: ", error);
   }
 };
-
 // save match
 export const saveMatch = async (gameMatch: Game) => {
   try {
@@ -57,7 +56,6 @@ export const saveMatch = async (gameMatch: Game) => {
     console.error("Error in saving match: ", error);
   }
 };
-
 // fetch all matches
 export const featchMatchs = async () => {
   try {
@@ -65,5 +63,14 @@ export const featchMatchs = async () => {
     return response;
   } catch (error) {
     console.error("Error in fetching matchs: ", error);
+  }
+};
+//fetch matche by ID
+export const featchMatchByID = async (id: string) => {
+  try {
+    const res = await axios.get(`${API_BASE_URL}/game/${id}`);
+    return res.data;
+  } catch (error) {
+    console.error("Can not fetch match!!");
   }
 };

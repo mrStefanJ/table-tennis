@@ -1,18 +1,29 @@
 import { Link } from "react-router-dom";
 import "./style.css";
 import { useEffect, useState } from "react";
-import { featchMatchs } from "../../jasonData/data";
+import { featchMatchByID, featchMatchs } from "../../jasonData/data";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
   Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  SelectChangeEvent,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Game, Set } from "../../jasonData/type";
+import Footer from "../Footer/Footer";
 
 const ResultTable = () => {
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<Game[]>([]);
+  const [selectedMatch, setSelectedMatch] = useState<string>("");
+  const [selectedMatchData, setSelectedMatchData] = useState<Game | null>(null);
 
   useEffect(() => {
     fetchMatches();
@@ -23,46 +34,87 @@ const ResultTable = () => {
     setData(matchs!.data);
   };
 
-  console.log(data);
+  const fetchMatch = async (id: string) => {
+    const matchData = await featchMatchByID(id);
+    setSelectedMatchData(matchData || null);
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    const selectedId = event.target.value as string;
+    setSelectedMatch(selectedId);
+    fetchMatch(selectedId);
+  };
 
   return (
-    <div className="container-result">
-      <Box>
-        <Link to="/" className="btn-back">
-          Go Back
-        </Link>
-      </Box>
-      <div className="container--table">
-        <h2>Result</h2>
-        <ul>
-          {data.map((match: Game) => (
-            <div key={match.id}>
-              <h2>Match {}</h2>
-              <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="match-content"
-                >
-                  <p>
+    <>
+      <div className="result-table-container">
+        <Box>
+          <Link to="/" className="result-table__btn-back">
+            Go Back
+          </Link>
+        </Box>
+        <div className="result-table">
+          <h2 className="result-table__heading">
+            Matches that have been played
+          </h2>
+          <Box className="result-table__select">
+            <FormControl sx={{ minWidth: 220 }}>
+              <InputLabel id="select-label">Match</InputLabel>
+              <Select
+                id="select-match"
+                value={selectedMatch}
+                label="Match"
+                onChange={handleChange}
+              >
+                {data.map((match: Game) => (
+                  <MenuItem value={match.id} key={match.id}>
                     {match.players[0].firstName} VS {match.players[1].firstName}
-                  </p>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <ul className="result-sets">
-                    {match.sets.map((set: Set, index: number) => (
-                      <li key={index}>
-                        <p>Set {index + 1}</p>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+          <TableContainer className="result-table__table-container">
+            <Table
+              sx={{ minWidth: 600 }}
+              aria-label="simple table"
+              className="result-table__table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell className="result-table__cell">Set 1</TableCell>
+                  <TableCell className="result-table__cell">Set 2</TableCell>
+                  <TableCell className="result-table__cell">Set 3</TableCell>
+                  <TableCell className="result-table__cell">Set 4</TableCell>
+                  <TableCell className="result-table__cell">Set 5</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  {selectedMatchData ? (
+                    selectedMatchData.sets.map((set: Set, index: number) => (
+                      <TableCell
+                        key={index}
+                        component="th"
+                        scope="row"
+                        className="result-table__cell"
+                      >
                         {set.player1} - {set.player2}
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionDetails>
-              </Accordion>
-            </div>
-          ))}
-        </ul>
+                      </TableCell>
+                    ))
+                  ) : (
+                    <TableCell colSpan={5} className="result-table__cell">
+                      Select a match
+                    </TableCell>
+                  )}
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
