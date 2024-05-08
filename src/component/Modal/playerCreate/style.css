@@ -1,4 +1,4 @@
-.players-form {
+.modal-create__form {
   position: absolute;
   left: 20%;
   top: 20%;
@@ -10,7 +10,7 @@
   padding: 20px;
 }
 
-.input-fields {
+.modal-create__input-fields {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -18,7 +18,7 @@
   height: auto;
 }
 
-.fields {
+.modal-create__fields {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -26,34 +26,34 @@
   height: 330px;
 }
 
-.player-field {
+.modal-create__field {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
 }
 
-.player-field .MuiInput-root:before {
+.modal-create__field .MuiInput-root:before {
   border-bottom: 2px solid #fdd55f !important;
 }
 
-.player-field .MuiInput-root:after {
+.modal-create__field .MuiInput-root:after {
   border-bottom: 2px solid #fdd55f !important;
 }
 
-.player-field .MuiInput-root:focus {
+.modal-create__field .MuiInput-root:focus {
   border-bottom: 2px solid #fdd55f !important;
 }
 
-.player-field .MuiTextField-root label {
+.modal-create__field .MuiTextField-root label {
   color: #000000;
 }
 
-.player-field .image-field {
+.modal-create__field .image-field {
   color: #ffffff;
 }
 
-.player-field .MuiInput-root:focus {
+.modal-create__field .MuiInput-root:focus {
   border-bottom: 2px solid #fdd55f !important;
 }
 
@@ -68,11 +68,15 @@
 .MuiInput-root.Mui-focused {
   border-bottom: 2px solid #fdd55f !important;
 }
+.modal-create__error-message{
+  color: #ff0000;
+}
 
-.button-action {
+.modal-create__button-action {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding: 20px 0;
 }
+

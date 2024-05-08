@@ -15,6 +15,7 @@ const CustomButton = styled(Button)({
   padding: "10px 20px",
   cursor: "pointer",
   transition: "background-color 0.3s, color 0.3s",
+  textTransform: "capitalize",
   "&:hover": {
     backgroundColor: "#fdd55f",
     borderColor: "#fdd55f",
@@ -51,8 +52,8 @@ const ModalCreate = ({
   const handleAddPlayer = async () => {
     try {
       if (!newPlayer.firstName.trim() || !newPlayer.lastName.trim()) {
-        setfirstNameError("First name and must not be empty!!!");
-        setLastNameError("Last name and must not be empty!!!");
+        setfirstNameError("First name must not be empty!!!");
+        setLastNameError("Last name must not be empty!!!");
         return;
       }
 
@@ -97,12 +98,12 @@ const ModalCreate = ({
 
   return (
     <Modal open>
-      <Box component="form" className="players-form">
-        <Box className="input-fields">
-          <div className="fields">
-            <div className="player-field">
+      <Box component="form" className="modal-create__form">
+        <Box className="modal-create__input-fields">
+          <div className="modal-create__fields">
+            <div className="modal-create__field">
               <TextField
-                id="player-firsname"
+                id="player-firstname"
                 name="firstName"
                 label="First Name"
                 variant="standard"
@@ -111,10 +112,10 @@ const ModalCreate = ({
               />
 
               {firstNameError && (
-                <p style={{ color: "#ff0000" }}>{firstNameError}</p>
+                <p className="modal-create__error-message">{firstNameError}</p>
               )}
             </div>
-            <div className="player-field">
+            <div className="modal-create__field">
               <TextField
                 id="player-lastname"
                 name="lastName"
@@ -124,10 +125,10 @@ const ModalCreate = ({
                 onChange={handleChange}
               />
               {lastNameError && (
-                <p style={{ color: "#ff0000" }}>{lastNameError}</p>
+                <p className="modal-create__error-message">{lastNameError}</p>
               )}
             </div>
-            <div className="player-field">
+            <div className="modal-create__field">
               <TextField
                 id="player-title"
                 name="title"
@@ -140,7 +141,7 @@ const ModalCreate = ({
           </div>
           <div className="image">
             {newPlayer.image && (
-              <div className="player-field">
+              <div className="modal-create__field">
                 <img
                   src={newPlayer.image}
                   alt="Uploaded Player"
@@ -155,22 +156,24 @@ const ModalCreate = ({
                 style={{ maxWidth: "200px" }}
               />
             )}
-            <div className="player-field">
+            <div className="modal-create__field">
               <input
-                className="image-field"
+                className="modal-create__uploaded-image"
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
                 placeholder="Upload player image"
               />
-              {imageError && <p style={{ color: "#ff0000" }}>{imageError}</p>}
+              {imageError && (
+                <p className="modal-create__error-message">{imageError}</p>
+              )}
             </div>
           </div>
         </Box>
-        <div className="button-action">
+        <div className="modal-create__button-action">
           <CustomButton
             type="button"
-            className="custom-button"
+            className="modal-create__custom-button modal-create__custom-button--add"
             variant="outlined"
             onClick={handleAddPlayer}
           >
@@ -178,7 +181,7 @@ const ModalCreate = ({
           </CustomButton>
           <CustomButton
             type="button"
-            className="custom-button"
+            className="modal-create__custom-button modal-create__custom-button--close"
             variant="outlined"
             onClick={closeCreaterModal}
           >

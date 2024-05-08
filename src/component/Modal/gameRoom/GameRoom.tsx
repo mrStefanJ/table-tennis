@@ -1,5 +1,6 @@
 import React, { EventHandler, useState } from "react";
 import {
+  Box,
   Button,
   Modal,
   Paper,
@@ -71,7 +72,7 @@ const GameRoom = ({
   return (
     <Modal open>
       <div className="modal-room">
-        <h2>GameRoom</h2>
+        <h2 className="modal-room__title">Room</h2>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 500 }}>
             <TableHead>
@@ -90,14 +91,14 @@ const GameRoom = ({
                     <TextField
                       value={matchData.sets[index].player1}
                       label={`Player 1 - Set ${index + 1}`}
-                      className="input-size"
+                      className="modal-room__input-size"
                       type="number"
                       onChange={handleValues(index, "player1")}
                     />
                     <TextField
                       value={matchData.sets[index].player2}
                       label={`Player 2 - Set ${index + 1}`}
-                      className="input-size"
+                      className="modal-room__input-size"
                       type="number"
                       onChange={handleValues(index, "player2")}
                     />
@@ -107,8 +108,14 @@ const GameRoom = ({
             </TableBody>
           </Table>
         </TableContainer>
-        <Button onClick={handleSubmit}>Save Match</Button>
-        <Button onClick={closeModal}>Cancel</Button>
+        <Box className="modal-room__button">
+          <Button onClick={handleSubmit} className="modal-room__button--save">
+            Save Match
+          </Button>
+          <Button onClick={closeModal} className="modal-room__button--cancel">
+            Cancel
+          </Button>
+        </Box>
       </div>
     </Modal>
   );

@@ -3,27 +3,49 @@
   height: 400px;
   position: absolute;
   top: 20%;
-  left: 4%;
-  background-color: #d3cccc;
+  left: 13%;
+  background-color: #ffffff;
   color: #ffffff;
   border-radius: 30px;
   box-shadow: -2px -1px 12px #676666;
 }
-
-.players {
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
+.modal-room__title {
+  text-align: center;
+  color: #4343ce;
 }
 
-.border-result {
-  width: 50%;
-  margin: 0 25px;
-  .input-size {
-    width: 100px;
-  }
-}
-
-.MuiTextField-root.input-size{
+.MuiTextField-root.modal-room__input-size {
   margin: 10px 0;
+}
+
+.modal-room__button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.modal-room__button .modal-room__button--save {
+  text-transform: capitalize;
+  color: #4fcf75;
+  text-transform: none;
+  border: 2px solid #4fcf75;
+  margin-right: 20px;
+}
+
+.modal-room__button .modal-room__button--save:hover{
+  color: #ffffff;
+  background: #4fcf75;
+}
+
+.modal-room__button .modal-room__button--cancel {
+  text-transform: capitalize;
+  color: #fdd55f;
+  text-transform: none;
+  border: 2px solid #fdd55f;
+}
+
+.modal-room__button .modal-room__button--cancel:hover{
+  color: #ffffff;
+  background: #fdd55f;
+
 }
