@@ -1,19 +1,18 @@
-.container_random-player {
+@import url("../../style/variable.css");
+
+.container-random-player {
   padding-top: 20px;
   padding-bottom: 105px;
 }
 
-.randomPlayers-choosen {
+.random-players__choosen {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.title {
-  background: linear-gradient(45deg, black, transparent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.random-players__title {
+  color: var(--balck);
 }
 
 .choosen-player {
@@ -32,11 +31,12 @@
 
 .MuiButton-root.btn {
   text-transform: capitalize;
-  border: 2px solid #4343ce;
-  background: #ffffff;
-  color: #4343ce;
-  &:hover {
-    color: #fff;
-    background: #4343ce;
-  }
+  border: 2px solid var(--blue);
+  background: var(--white);
+  color: var(--blue);
+}
+
+.MuiButton-root.btn:hover {
+  color: var(--white);
+  background: var(--blue);
 }

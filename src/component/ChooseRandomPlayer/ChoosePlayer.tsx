@@ -50,12 +50,12 @@ const ChoosePlayer = () => {
   };
 
   return (
-    <div className="container_random-player">
-      <div className="randomPlayers">
+    <div className="container-random-player">
+      <div className="random-players">
         <Button
           onClick={pickRandomPlayers}
           disabled={loading || players.length < 2}
-          className="btn"
+          className="btn btn--pick"
         >
           {loading ? "Loading..." : "Pick Random Players"}
         </Button>
@@ -65,8 +65,8 @@ const ChoosePlayer = () => {
           </Box>
         ) : (
           <div>
-            <h2 className="title">Randomly Picked Players</h2>
-            <div className="randomPlayers-choosen">
+            <h3 className="random-players__title">Randomly Picked Players</h3>
+            <div className="random-players__choosen">
               <div className="choosen-player">
                 <p className="player-name">
                   Player 1: {randomPlayers[0].firstName}

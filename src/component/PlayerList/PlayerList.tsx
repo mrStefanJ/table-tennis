@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { getPlayers } from "../jasonData/data";
-import { Player } from "../jasonData/type";
+import { getPlayers } from "../../jasonData/data";
+import { Player } from "../../jasonData/type";
 import "./style.css";
 import {
   Box,
@@ -15,8 +15,8 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { ModalCreate } from "../component/Modal/playerCreate";
-import { ModalDelete } from "../component/Modal/playerDelete";
+import { ModalCreate } from "../Modal/playerCreate";
+import { ModalDelete } from "../Modal/playerDelete";
 import { Link } from "react-router-dom";
 
 const PlayerList = () => {
@@ -67,10 +67,10 @@ const PlayerList = () => {
   return (
     <div className="container">
       <div className="players-list">
-        <div className="header">
-          <h2>Players</h2>
-          <div className="btn__player-add">
-            <Box className="btn__add-player">
+        <div className="players-list__header">
+          <h2 className="players-list__title">Players</h2>
+          <div className="players-list__actions">
+            <Box className="players-list__add">
               <Button onClick={openCreaterModal}>Add New Player</Button>
             </Box>
             {openModal && (
@@ -112,7 +112,7 @@ const PlayerList = () => {
                       <TableCell style={{ width: 160 }} align="right">
                         <Button
                           onClick={openDeleteModal}
-                          className="btn delete"
+                          className="players-list__btn delete"
                         >
                           Delete
                         </Button>
@@ -123,13 +123,13 @@ const PlayerList = () => {
                             fetchPlayers={fetchPlayers}
                           />
                         )}
-                        <Link
+                        <Button
                           key={player.id}
-                          to={`profile/${player.id}`}
-                          className="btn profile"
+                          href={`profile/${player.id}`}
+                          className="players-list__btn profile"
                         >
                           Profile
-                        </Link>
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}

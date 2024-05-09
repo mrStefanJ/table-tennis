@@ -1,0 +1,78 @@
+@import url("../../style/variable.css");
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.players-list__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.players-list__title {
+  color: var(--balck);;
+}
+
+.players-list__add button {
+  color: var(--blue);;
+  text-transform: none;
+  border: 2px solid var(--blue);;
+}
+
+.players-list__add button:hover {
+  background-color: var(--blue);;
+  color: var(--white);;
+}
+
+.player-list .image img {
+  width: 10%;
+  height: 20%;
+}
+
+.player-list .MuiPaper-root {
+  min-height: 420px;
+}
+
+td,
+th {
+  border: 1px solid var(--grey);;
+  text-align: left;
+  padding: 8px;
+}
+
+.players-list__btn {
+  min-width: 64px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 4px;
+  line-height: 1.75;
+}
+
+.MuiButton-root.profile {
+  margin: 0 5px;
+  padding: 1px 0;
+  color: var(--yellow);;
+  border: 2px solid var(--yellow);;
+  text-transform: capitalize;
+}
+.MuiButton-root.profile:hover {
+  background-color: var(--yellow);;
+  color: var(--white);;
+}
+
+.MuiButton-root.delete {
+  padding: 0px 8px;
+  color: var(--red);;
+  border: 2px solid var(--red);;
+  text-transform: capitalize;
+}
+
+.MuiButton-root.delete:hover {
+  background-color: var(--red);;
+  color: var(--white);;
+}

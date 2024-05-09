@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { Game, Set } from "../../jasonData/type";
-import Footer from "../Footer/Footer";
+import { Footer } from "../../component/Footer";
 
 const ResultTable = () => {
   const [data, setData] = useState<Game[]>([]);

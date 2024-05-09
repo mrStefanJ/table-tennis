@@ -1,5 +1,7 @@
+@import url("../../style/variable.css");
+
 .result-table-container{
-    background: #ffffff;
+    background: var(--white);
     width: 720px;
     height: 770px;
 }
@@ -10,7 +12,7 @@
 
 .result-table__btn-back{
   margin: 10px;
-  color: #000000;
+  color: var(--black);
   position: relative;
   display: inline-block;
   text-decoration: none;
@@ -24,7 +26,7 @@
     bottom: -2px;
     width: 0;
     height: 2px;
-    background-color: #4343ce;
+    background-color: var(--blue);
     transition: width 0.3s ease;
 }
 
@@ -37,7 +39,7 @@
 }
 
 .result-table__btn-back:hover {
-    color: #4343ce;
+    color: var(--blue);
 }
 
 .result-table__btn-back:hover::before,
