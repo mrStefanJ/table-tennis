@@ -1,17 +1,19 @@
+@import url("../../style/variable.css");
+
 .player__info {
   width: 720px;
   height: auto;
-  background: #ffffff;
+  background: var(--white);
   padding-bottom: 30px;
 }
 
 .player-info__title {
   padding-left: 30px;
-  color: #4343ce;
+  color: var(--blue);
   font-weight: bold;
 }
 
-.player-info__profile.MuiBox-root{
+.player-info__profile.MuiBox-root {
   text-align: left;
   padding-left: 30px;
 }
@@ -31,7 +33,7 @@
 
 .player-info__btn-back {
   margin: 10px;
-  color: #000000;
+  color: var(--black);
   position: relative;
   display: inline-block;
   text-decoration: none;
@@ -45,7 +47,7 @@
   bottom: -2px;
   width: 0;
   height: 2px;
-  background-color: #4343ce;
+  background-color: var(--blue);
   transition: width 0.3s ease;
 }
 
@@ -58,7 +60,7 @@
 }
 
 .player-info__btn-back:hover {
-  color: #4343ce;
+  color: var(--blue);
 }
 
 .player-info__btn-back:hover::before,
@@ -66,17 +68,17 @@
   width: 50%;
 }
 
-.player-info__btn.MuiBox-root{
-    padding-left: 30px;
+.player-info__btn.MuiBox-root {
+  padding-left: 30px;
 }
 
 .player-info__btn .player-info__btn-edit {
-    color: #4343ce;
-    text-transform: none;
-    border: 2px solid #4343ce;
+  color: var(--blue);
+  text-transform: none;
+  border: 2px solid var(--blue);
 }
 
 .player-info__btn .player-info__btn-edit:hover {
-    background-color: #4343ce;
-    color: #ffffff;
+  background-color: var(--blue);
+  color: var(--white);
 }

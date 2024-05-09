@@ -3,9 +3,9 @@ import { selectedPlayer } from "../../jasonData/data";
 import { useEffect, useState } from "react";
 import { Player } from "../../jasonData/type";
 import "./style.css";
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { ModalEdit } from "../../component/Modal/playerEdit";
-import Footer from "../../component/Footer/Footer";
+import { Footer } from "../../component/Footer";
 
 const Profile = () => {
   const params = useParams<{ playerId: string }>();

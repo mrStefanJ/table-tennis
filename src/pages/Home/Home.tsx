@@ -1,13 +1,12 @@
-import React from "react";
-import PlayerList from "../PlayerList";
-import ChoosePlayer from "../ChooseRandomPlayer/ChoosePlayer";
+import { ChoosePlayer } from "../../component/ChooseRandomPlayer";
+import { PlayerList } from "../../component/PlayerList";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <PlayerList />
       <ChoosePlayer />
-    </div>
+    </>
   );
 };
 

@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Profile from "./pages/PlayerProfile/Profile";
-import NotFoundPage from "./pages/NotFoundPage";
-import ResultTable from "./component/ResultTable/ResultTable";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
+import ResultTable from "./pages/ResultTable/ResultTable";
 import Standings from "./pages/Standings/Standings";
 
 const router = createBrowserRouter([

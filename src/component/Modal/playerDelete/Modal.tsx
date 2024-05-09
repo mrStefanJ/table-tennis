@@ -18,16 +18,18 @@ const ModalDelete = ({
   };
   return (
     <Modal open>
-      <Box className="player-modal">
-        <h2>Are you sure, you want to delete player</h2>
-        <div className="btn__action">
+      <Box className="modal-delete-player">
+        <h2 className="modal-delete-player__title">
+          Are you sure, you want to delete player?
+        </h2>
+        <div className="modal-delete-player__actions">
           <Button
-            className="btn-delete"
+            className="btn btn-delete"
             onClick={() => handleDeleteItem(playerId)}
           >
             Delete
           </Button>
-          <Button className="btn-cancel" onClick={() => onClose()}>
+          <Button className="btn btn-cancel" onClick={() => onClose()}>
             Close
           </Button>
         </div>

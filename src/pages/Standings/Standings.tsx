@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { featchMatchs } from "../../jasonData/data";
 import {
@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@mui/material";
 import Footer from "../../component/Footer/Footer";
+import "./style.css";
 
 const Standings = () => {
   const [matchs, setMatchs] = useState<any>([]);
@@ -28,8 +29,8 @@ const Standings = () => {
 
   return (
     <>
-      <div className="container-result">
-        <Link to="/" className="btn-back">
+      <div className="container-standing">
+        <Link to="/" className="standing__btn-back">
           Go Back
         </Link>
         {/*<div className="container--table">
@@ -50,7 +51,7 @@ const Standings = () => {
           </Table>
         </TableContainer>
       </div> */}
-        <h1>In progress</h1>
+        <h1 className="standing__title">In progress</h1>
       </div>
       <Footer />
     </>

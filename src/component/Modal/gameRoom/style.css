@@ -1,17 +1,19 @@
+@import url("../../../style/variable.css");
+
 .modal-room {
   width: 880px;
   height: 400px;
   position: absolute;
   top: 20%;
   left: 13%;
-  background-color: #ffffff;
-  color: #ffffff;
+  background-color: var(--white);;
+  color: var(--white);;
   border-radius: 30px;
   box-shadow: -2px -1px 12px #676666;
 }
 .modal-room__title {
   text-align: center;
-  color: #4343ce;
+  color: var(--blue);
 }
 
 .MuiTextField-root.modal-room__input-size {
@@ -26,26 +28,26 @@
 
 .modal-room__button .modal-room__button--save {
   text-transform: capitalize;
-  color: #4fcf75;
+  color: var(--green);
   text-transform: none;
-  border: 2px solid #4fcf75;
+  border: 2px solid var(--green);
   margin-right: 20px;
 }
 
 .modal-room__button .modal-room__button--save:hover{
-  color: #ffffff;
-  background: #4fcf75;
+  color: var(--white);;
+  background: var(--green);
 }
 
 .modal-room__button .modal-room__button--cancel {
   text-transform: capitalize;
-  color: #fdd55f;
+  color: var(--yellow);
   text-transform: none;
-  border: 2px solid #fdd55f;
+  border: 2px solid var(--yellow);
 }
 
 .modal-room__button .modal-room__button--cancel:hover{
-  color: #ffffff;
-  background: #fdd55f;
+  color: var(--white);;
+  background: var(--yellow);
 
 }

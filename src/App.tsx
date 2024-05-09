@@ -1,8 +1,8 @@
 import "./App.css";
 import Footer from "./component/Footer/Footer";
 import Header from "./component/Header/Header";
-import ChoosePlayer from "./pages/ChooseRandomPlayer/ChoosePlayer";
-import PlayerList from "./pages/PlayerList";
+import ChoosePlayer from "./component/ChooseRandomPlayer/ChoosePlayer";
+import PlayerList from "./component/PlayerList/PlayerList";
 
 function App() {
   return (
