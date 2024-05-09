@@ -1,4 +1,4 @@
-## Start
+## Table Tennis
 
 Using React, TypeScript, React-Router CSS and JSON server in project.
 This project is about Table Tenis and has the option to: 
