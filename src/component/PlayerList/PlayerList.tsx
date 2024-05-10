@@ -17,7 +17,6 @@ import {
 } from "@mui/material";
 import { ModalCreate } from "../Modal/playerCreate";
 import { ModalDelete } from "../Modal/playerDelete";
-import { Link } from "react-router-dom";
 
 const PlayerList = () => {
   const [players, setPlayers] = useState<Player[]>([]);

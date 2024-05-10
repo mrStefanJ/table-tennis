@@ -1,6 +1,6 @@
 import { Box, Button, Modal } from "@mui/material";
 import "./style.css";
-import { deletePlayer, getPlayers } from "../../../jasonData/data";
+import { deletePlayer } from "../../../jasonData/data";
 
 const ModalDelete = ({
   onClose,

@@ -12,6 +12,10 @@ const Profile = () => {
   const [player, setPlayer] = useState<Player>();
   const [openModal, setOpenModal] = useState(false);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const fetchData = async () => {
     try {
       const data = await selectedPlayer(params.playerId as string);
@@ -26,10 +30,6 @@ const Profile = () => {
     setOpenModal(false);
     fetchData();
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   if (!player) {
     return <div>Loading...</div>;
