@@ -38,7 +38,7 @@ const Profile = () => {
     <>
       <div className="player__info">
         <Link to="/" className="player-info__btn-back">
-          Go Back
+          Back
         </Link>
         <h2 className="player-info__title">Player profile</h2>
         <Box className="player-info__profile">
@@ -46,7 +46,6 @@ const Profile = () => {
             <img src={player?.image} alt={player?.firstName} />
           </div>
           <div className="player-info__details">
-            <p className="player-info__detail">Player ID: {player?.id}</p>
             <p className="player-info__detail">
               First Name: {player?.firstName}
             </p>

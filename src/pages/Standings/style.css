@@ -1,50 +1,50 @@
 @import url("../../style/variable.css");
 
-.container-standing{
-    width: 720px;
-    background: var(--white);
+.container-standing {
+  width: 720px;
+  background: var(--white);
 }
 
 .standing__btn-back {
-    margin: 10px;
-    color: var(--black);
-    position: relative;
-    display: inline-block;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .standing__btn-back::before,
-  .standing__btn-back::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background-color: var(--blue);
-    transition: width 0.3s ease;
-  }
-  
-  .standing__btn-back::before {
-    left: 0;
-  }
-  
-  .standing__btn-back::after {
-    right: 0;
-  }
-  
-  .standing__btn-back:hover {
-    color: var(--blue);
-  }
-  
-  .standing__btn-back:hover::before,
-  .standing__btn-back:hover::after {
-    width: 50%;
-  }
+  margin: 10px;
+  color: var(--black);
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
 
-.standing__title{
-    margin: 0;
-    padding-left: 30px;
-    color: var(--black);
-    font-weight: bold;
+.standing__btn-back::before,
+.standing__btn-back::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: var(--blue);
+  transition: width 0.3s ease;
+}
+
+.standing__btn-back::before {
+  left: 0;
+}
+
+.standing__btn-back::after {
+  right: 0;
+}
+
+.standing__btn-back:hover {
+  color: var(--blue);
+}
+
+.standing__btn-back:hover::before,
+.standing__btn-back:hover::after {
+  width: 50%;
+}
+
+.standing__title {
+  margin: 10px 0;
+  padding-left: 10px;
+  color: var(--black);
+  font-weight: bold;
 }

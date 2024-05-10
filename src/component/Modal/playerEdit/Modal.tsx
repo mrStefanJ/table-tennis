@@ -68,7 +68,6 @@ const ModalEdit = ({
   return (
     <Modal open>
       <Box component="form" className="modal-edit__form">
-        <h2>Edit Profile</h2>
         <Box className="modal-edit__input-fields">
           <div className="modal-edit__fields">
             <div className="modal-edit__field">

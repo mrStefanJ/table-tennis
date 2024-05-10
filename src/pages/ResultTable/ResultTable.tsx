@@ -50,7 +50,7 @@ const ResultTable = () => {
       <div className="result-table-container">
         <Box>
           <Link to="/" className="result-table__btn-back">
-            Go Back
+            Back
           </Link>
         </Box>
         <div className="result-table">
