@@ -1,12 +1,13 @@
 ## Table Tennis
 
 Using React, TypeScript, React-Router CSS and JSON server in project.
-This project is about Table Tenis and has the option to: 
-1. Display list of all players that are playing
+This project is about Table Tenis using CRUD operations and has to: 
+1. Display list of all players
 2. Create new Player
 3. Change profile of player
 4. Delete player
 5. Display the result of the sets played by the two players
+6. Display standing result to see point of each player(Won the set, Lost the set, Played the match...)
 
 ### Instalation
 
