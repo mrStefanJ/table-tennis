@@ -18,12 +18,12 @@ const ChoosePlayer = () => {
 
   const fetchPlayers = async () => {
     const data = await getPlayers();
-    setLoading(false);
     setPlayers(data);
   };
 
   const pickRandomPlayers = () => {
     setLoading(true);
+    fetchPlayers();
     let index1 = Math.floor(Math.random() * players.length);
     let index2 = Math.floor(Math.random() * players.length);
     while (index2 === index1) {
