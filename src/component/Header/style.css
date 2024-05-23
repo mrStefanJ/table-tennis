@@ -1,4 +1,4 @@
-@import url("");
+@import url("../../style/variable.css");
 
 .nav{
     display: flex;
@@ -9,7 +9,7 @@
 
 .nav__text {
     margin: 10px;
-    color: #000000;
+    color: var(--black);
     position: relative;
     display: inline-block;
     text-decoration: none;

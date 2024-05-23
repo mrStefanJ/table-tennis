@@ -14,7 +14,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [player]); // eslint-disable-line
 
   const fetchData = async () => {
     try {
