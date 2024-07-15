@@ -1,15 +1,29 @@
 @import url("../../../style/variable.css");
 
+.modal--position{
+  top: 100px !important;
+  @media only screen and (min-width: 720px) {
+    left: 3% !important;
+  }
+  @media only screen and (min-width: 992px) {
+    left: 20% !important;
+  } 
+
+  @media only screen and (min-width: 1200px) {
+    left: 26% !important;
+  }
+}
+
 .modal-room {
-  width: 880px;
   height: 400px;
-  position: absolute;
-  top: 20%;
-  left: 13%;
   background-color: var(--white);;
   color: var(--white);;
   border-radius: 30px;
   box-shadow: -2px -1px 12px #676666;
+
+  @media only screen and (min-width: 720px) {
+    width: 700px;
+  }
 }
 .modal-room__title {
   text-align: center;
@@ -50,4 +64,8 @@
   color: var(--white);;
   background: var(--yellow);
 
+}
+
+.table-container{
+  background: var(--white);
 }

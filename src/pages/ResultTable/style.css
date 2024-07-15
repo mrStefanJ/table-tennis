@@ -1,13 +1,12 @@
 @import url("../../style/variable.css");
 
-.result-table-container {
-  background: var(--white);
-  width: 720px;
-  height: 770px;
-}
-
 .MuiBox-root {
   padding: 10px 5px;
+}
+
+.table-container{
+  background: var(--white);
+  width: 100%;
 }
 
 .result-table__heading {
@@ -58,7 +57,6 @@
   margin-left: 4px;
   padding: 30px 0;
   overflow-x: hidden;
-  width: 99% !important;
 }
 
 .result-table__table .ressult-table__cell {
@@ -67,3 +65,12 @@
 .MuiTableBody-root .result-table__cell {
   text-align: center;
 }
+
+.MuiPaper-root .MuiTableContainer-root {
+  width: 326px;
+
+  @media only screen and (min-width: 340px) {
+    width: 400px;
+  }
+}
+

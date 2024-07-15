@@ -69,8 +69,10 @@ const PlayerList = () => {
         <div className="players-list__header">
           <h2 className="players-list__title">Players</h2>
           <div className="players-list__actions">
-            <Box className="players-list__add">
-              <Button onClick={openCreaterModal}>Add New Player</Button>
+            <Box className="players-list__btn">
+              <Button onClick={openCreaterModal} className="add">
+                Add New Player
+              </Button>
             </Box>
             {openModal && (
               <ModalCreate
@@ -85,7 +87,7 @@ const PlayerList = () => {
         ) : (
           <>
             <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <Table aria-label="simple table" className="table-player">
                 <TableHead>
                   <TableRow>
                     <TableCell>First Name</TableCell>
@@ -105,10 +107,8 @@ const PlayerList = () => {
                       <TableCell component="th" scope="row">
                         {player.firstName}
                       </TableCell>
-                      <TableCell style={{ width: 160 }} align="right">
-                        {player.lastName}
-                      </TableCell>
-                      <TableCell style={{ width: 160 }} align="right">
+                      <TableCell align="left">{player.lastName}</TableCell>
+                      <TableCell align="right" className="table-action">
                         <Button
                           onClick={openDeleteModal}
                           className="players-list__btn delete"

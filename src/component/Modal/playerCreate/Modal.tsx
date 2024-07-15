@@ -173,7 +173,7 @@ const ModalCreate = ({
         <div className="modal-create__button-action">
           <CustomButton
             type="button"
-            className="modal-create__custom-button modal-create__custom-button--add"
+            className="modal-create__custom-button"
             variant="outlined"
             onClick={handleAddPlayer}
           >
@@ -181,7 +181,7 @@ const ModalCreate = ({
           </CustomButton>
           <CustomButton
             type="button"
-            className="modal-create__custom-button modal-create__custom-button--close"
+            className="modal-create__custom-button"
             variant="outlined"
             onClick={closeCreaterModal}
           >

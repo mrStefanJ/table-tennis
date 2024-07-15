@@ -73,11 +73,11 @@ const ResultTable = () => {
               </Select>
             </FormControl>
           </Box>
-          <TableContainer className="result-table__table-container">
+          <TableContainer className="table-container">
             <Table
-              sx={{ minWidth: 600 }}
+              sx={{ minWidth: 500 }}
               aria-label="simple table"
-              className="result-table__table"
+              className="result-table"
             >
               <TableHead>
                 <TableRow>

@@ -70,11 +70,11 @@ const GameRoom = ({
   };
 
   return (
-    <Modal open>
+    <Modal open aria-describedby="room-game" className="modal--position">
       <div className="modal-room">
         <h2 className="modal-room__title">Room</h2>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 500 }}>
+        <TableContainer className="table-container">
+          <Table sx={{ minWidth: 500 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 {[...Array(5).keys()].map((index) => (

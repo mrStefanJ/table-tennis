@@ -4,6 +4,7 @@ import { Player } from "../../jasonData/type";
 import "./style.css";
 import GameRoom from "../../component/Modal/gameRoom/GameRoom";
 import { Box, Button } from "@mui/material";
+import Image from "../../assets/table-tennis.png";
 
 const ChoosePlayer = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -62,6 +63,11 @@ const ChoosePlayer = () => {
         {randomPlayers.length === 0 ? (
           <Box className="text">
             <p>You dind't choose random players</p>
+            <img
+              src={Image}
+              alt="players and table-tennis"
+              className="image--deafult"
+            />
           </Box>
         ) : (
           <div>
@@ -69,7 +75,7 @@ const ChoosePlayer = () => {
             <div className="random-players__choosen">
               <div className="choosen-player">
                 <p className="player-name">
-                  Player 1: {randomPlayers[0].firstName}
+                  <span>Player 1:</span> {randomPlayers[0].firstName}
                 </p>
                 <img
                   className="player-image"
@@ -79,7 +85,7 @@ const ChoosePlayer = () => {
               </div>
               <div className="choosen-player">
                 <p className="player-name">
-                  Player 2: {randomPlayers[1].firstName}
+                  <span>Player 2:</span> {randomPlayers[1].firstName}
                 </p>
                 <img
                   className="player-image"

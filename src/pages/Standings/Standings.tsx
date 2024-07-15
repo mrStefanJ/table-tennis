@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { featchMatchs } from "../../jasonData/data";
 import {
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -9,6 +8,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import Footer from "../../component/Footer/Footer";
 import "./style.css";
 import { Link } from "react-router-dom";
@@ -67,7 +67,7 @@ const Standings = () => {
       });
 
       // Increment the played count for each player with the number of unique opponents
-      uniqueOpponents.forEach((opponentId) => {
+      uniqueOpponents.forEach((opponentId: string) => {
         const opponentStats = playersStatsMap.get(opponentId);
         opponentStats.played += uniqueOpponents.size - 1; // Exclude the player himself
       });
@@ -84,32 +84,44 @@ const Standings = () => {
           Back
         </Link>
         <h2 className="standing__title">Standings Result</h2>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Full Name</TableCell>
-                <TableCell>Played</TableCell>
-                <TableCell>Won in Set</TableCell>
-                <TableCell>Lost in Set</TableCell>
-                <TableCell>Point Won</TableCell>
-                <TableCell>Point Lost</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {playersData.map((player) => (
-                <TableRow key={player.id}>
-                  <TableCell>{player.name}</TableCell>
-                  <TableCell>{player.played}</TableCell>
-                  <TableCell>{player.won}</TableCell>
-                  <TableCell>{player.lost}</TableCell>
-                  <TableCell>{player.pointsWon}</TableCell>
-                  <TableCell>{player.pointsLost}</TableCell>
+        <Paper sx={{ width: "100%" }}>
+          <TableContainer className="result__table-container">
+            <Table aria-label="simple table" className="result-table__table">
+              <TableHead>
+                <TableRow>
+                  <TableCell className="sticky-column">Full Name</TableCell>
+                  <TableCell>Played</TableCell>
+                  <TableCell>Won in Set</TableCell>
+                  <TableCell>Lost in Set</TableCell>
+                  <TableCell>Point Won</TableCell>
+                  <TableCell>Point Lost</TableCell>
+                  <TableCell>POINTS</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {playersData.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={6}>The data is empty</TableCell>
+                  </TableRow>
+                ) : (
+                  playersData.map((player: Match) => (
+                    <TableRow key={player.id}>
+                      <TableCell className="sticky-column">
+                        {player.name}
+                      </TableCell>
+                      <TableCell>{player.played}</TableCell>
+                      <TableCell>{player.won}</TableCell>
+                      <TableCell>{player.lost}</TableCell>
+                      <TableCell>{player.pointsWon}</TableCell>
+                      <TableCell>{player.pointsLost}</TableCell>
+                      <TableCell>{player.won * 3}</TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       </div>
       <Footer />
     </>

@@ -15,20 +15,28 @@
 }
 
 .players-list__title {
-  color: var(--balck);;
+  color: var(--balck);
 }
 
-.players-list__add button {
-  color: var(--blue);;
+.MuiButton-root.add {
+  padding: 3px 5px;
+  color: var(--blue);
   text-transform: none;
-  border: 2px solid var(--blue);;
+  border: 2px solid var(--blue);
 }
 
-.players-list__add button:hover {
-  background-color: var(--blue);;
-  color: var(--white);;
+.MuiButton-root.add:hover {
+  background-color: var(--blue);
+  color: var(--white);
 }
 
+.players-list {
+  width: 100%;
+  @media only screen and (min-width: 720px) {
+    width: 520px;
+  }
+  
+}
 .player-list .image img {
   width: 10%;
   height: 20%;
@@ -38,9 +46,18 @@
   min-height: 420px;
 }
 
+.table-player{
+width: 100px;
+}
+
+.table-action {
+  text-align: center;
+}
+
+
 td,
 th {
-  border: 1px solid var(--grey);;
+  border: 1px solid var(--grey);
   text-align: left;
   padding: 8px;
 }
@@ -54,25 +71,31 @@ th {
 }
 
 .MuiButton-root.profile {
-  margin: 0 5px;
+  margin: 5px;
   padding: 1px 0;
-  color: var(--yellow);;
-  border: 2px solid var(--yellow);;
+  color: var(--yellow);
+  border: 2px solid var(--yellow);
   text-transform: capitalize;
+
+  @media only screen and (min-width: 720px) {
+    margin: 0 5px;
+  }
 }
+
 .MuiButton-root.profile:hover {
-  background-color: var(--yellow);;
-  color: var(--white);;
+  background-color: var(--yellow);
+  color: var(--white);
 }
 
 .MuiButton-root.delete {
+  margin: 5px;
   padding: 0px 8px;
-  color: var(--red);;
-  border: 2px solid var(--red);;
+  color: var(--red);
+  border: 2px solid var(--red);
   text-transform: capitalize;
 }
 
 .MuiButton-root.delete:hover {
-  background-color: var(--red);;
-  color: var(--white);;
+  background-color: var(--red);
+  color: var(--white);
 }
