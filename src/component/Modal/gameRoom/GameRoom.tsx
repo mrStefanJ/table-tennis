@@ -3,7 +3,6 @@ import {
   Box,
   Button,
   Modal,
-  Paper,
   Table,
   TableBody,
   TableCell,
