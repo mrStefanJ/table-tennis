@@ -50,10 +50,6 @@
 width: 100px;
 }
 
-.table-action {
-  text-align: center;
-}
-
 
 td,
 th {
@@ -65,34 +61,32 @@ th {
 .players-list__btn {
   min-width: 64px;
   text-decoration: none;
-  text-transform: uppercase;
   border-radius: 4px;
   line-height: 1.75;
 }
 
-.MuiButton-root.profile {
-  margin: 5px;
-  padding: 1px 0;
+.profile {
+  padding: 5px 10px;
   color: var(--yellow);
   border: 2px solid var(--yellow);
   text-transform: capitalize;
-
-  @media only screen and (min-width: 720px) {
-    margin: 0 5px;
-  }
 }
 
-.MuiButton-root.profile:hover {
+.profile:hover {
   background-color: var(--yellow);
   color: var(--white);
 }
 
 .MuiButton-root.delete {
-  margin: 5px;
-  padding: 0px 8px;
+  margin: 5px 0;
+  padding: 0;
   color: var(--red);
   border: 2px solid var(--red);
   text-transform: capitalize;
+
+  @media only screen and (min-width: 375px){
+    margin: 0 5px;
+  }
 }
 
 .MuiButton-root.delete:hover {

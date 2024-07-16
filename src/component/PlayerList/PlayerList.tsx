@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { ModalCreate } from "../Modal/playerCreate";
 import { ModalDelete } from "../Modal/playerDelete";
+import { Link } from "react-router-dom";
 
 const PlayerList = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -107,7 +108,7 @@ const PlayerList = () => {
                       {player.firstName}
                     </TableCell>
                     <TableCell align="left">{player.lastName}</TableCell>
-                    <TableCell align="right" className="table-action">
+                    <TableCell align="right">
                       <Button
                         onClick={openDeleteModal}
                         className="players-list__btn delete"
@@ -121,13 +122,13 @@ const PlayerList = () => {
                           fetchPlayers={fetchPlayers}
                         />
                       )}
-                      <Button
+                      <Link
                         key={player.id}
-                        href={`profile/${player.id}`}
+                        to={`/profile/${player.id}`}
                         className="players-list__btn profile"
                       >
                         Profile
-                      </Button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 ))
