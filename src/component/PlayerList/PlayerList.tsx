@@ -22,7 +22,6 @@ const PlayerList = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [openModal, setOpenModal] = useState(false);
   const [openModalDelete, setOpenModalDelete] = useState(false);
-  const [loading, setLoading] = useState<boolean>(true);
   const initialized = useRef(false);
 
   useEffect(() => {
@@ -35,7 +34,6 @@ const PlayerList = () => {
 
   const fetchPlayers = async () => {
     const data = await getPlayers();
-    setLoading(false);
     setPlayers(data);
   };
 
