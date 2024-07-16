@@ -1,78 +1,93 @@
 @import url("../../../style/variable.css");
 
 .modal-edit__form {
-    position: absolute;
+  position: absolute;
+  left: 3%;
+  top: 3%;
+  width: 90%;
+  background: var(--white);
+  z-index: 1;
+  border-radius: 30px;
+  box-shadow: 8px 10px 24px var(--yellow);
+  padding: 20px;
+
+  @media only screen and (min-width: 720px) {
+    left: 8%;
+    top: 5%;
+    width: 80%;
+  }
+
+  @media only screen and (min-width: 1024px) {
     left: 20%;
-    top: 20%;
-    width: 60%;
-    background: var(--white);
-    z-index: 1;
-    border-radius: 30px;
-    box-shadow: 8px 10px 24px var(--yellow);
-    padding: 20px;
+    width: 750px;
   }
+}
 
-  .modal-edit__input-fields {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: auto;
-  }
-  
-  .modal-edit__fields {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 200px;
-    height: 330px;
-  }
-  
-  .modal-edit__field {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-  }
-  
-  .modal-edit__field .MuiInput-root:before {
-    border-bottom: 2px solid var(--yellow) !important;
-  }
-  
-  .modal-edit__field .MuiInput-root:after {
-    border-bottom: 2px solid var(--yellow) !important;
-  }
-  
-  .modal-edit__field .MuiInput-root:focus {
-    border-bottom: 2px solid var(--yellow) !important;
-  }
-  
-  .modal-edit__field .MuiTextField-root label {
-    color: var(--black);
-  }
-  
-  .modal-edit__field .image-field {
-    color: var(--white);
-  }
-  
-  .modal-edit__field .MuiInput-root:focus {
-    border-bottom: 2px solid var(--yellow) !important;
-  }
-  
-  .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
-    border-bottom: 2px solid var(--yellow) !important;
-  }
-  
-  .MuiInput-root:hover:not(.Mui-disabled, .Mui-error):after {
-    border-bottom: 2px solid var(--yellow) !important;
-  }
-  
-  .MuiInput-root.Mui-focused {
-    border-bottom: 2px solid var(--yellow) !important;
-  }
+.modal-edit__input-fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
 
-  .modal-edit__btn{
-    display: flex;
+  @media only screen and (min-width: 720px) {
     flex-direction: row;
-    justify-content: space-evenly;
   }
+}
+
+.modal-edit__fields {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 200px;
+  height: 330px;
+}
+
+.modal-edit__field {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.modal-edit__field .MuiInput-root:before {
+  border-bottom: 2px solid var(--yellow) !important;
+}
+
+.modal-edit__field .MuiInput-root:after {
+  border-bottom: 2px solid var(--yellow) !important;
+}
+
+.modal-edit__field .MuiInput-root:focus {
+  border-bottom: 2px solid var(--yellow) !important;
+}
+
+.modal-edit__field .MuiTextField-root label {
+  color: var(--black);
+}
+
+.modal-edit__field .image-field {
+  color: var(--white);
+}
+
+.modal-edit__field .MuiInput-root:focus {
+  border-bottom: 2px solid var(--yellow) !important;
+}
+
+.MuiInput-root:hover:not(.Mui-disabled, .Mui-error):before {
+  border-bottom: 2px solid var(--yellow) !important;
+}
+
+.MuiInput-root:hover:not(.Mui-disabled, .Mui-error):after {
+  border-bottom: 2px solid var(--yellow) !important;
+}
+
+.MuiInput-root.Mui-focused {
+  border-bottom: 2px solid var(--yellow) !important;
+}
+
+.modal-edit__btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

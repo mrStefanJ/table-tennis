@@ -3,9 +3,8 @@
 .modal-create__form {
   position: absolute;
   left: 3%;
-  top: 2%;
-  width: 91%;
-  height: 91%;
+  top: 3%;
+  width: 90%;
   background: var(--white);
   z-index: 1;
   border-radius: 30px;
@@ -16,7 +15,6 @@
     left: 8%;
     top: 14%;
     width: 80%;
-    height: 70%;
   }
 
   @media only screen and (min-width: 1024px) {
