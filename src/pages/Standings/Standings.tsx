@@ -25,10 +25,10 @@ const Standings = () => {
     const matchesResponse = await featchMatchs();
     const matches = matchesResponse?.data;
     const playersStatsMap: Map<string, any> = new Map();
-    matches.map((match: Game) => {
+    matches.forEach((match: Game) => {
       const uniqueOpponents: Set<string> = new Set();
 
-      match.players.map((player: Player) => {
+      match.players.forEach((player: Player) => {
         const playerId = player.id;
         const playerName = `${player.firstName} ${player.lastName}`;
 
@@ -46,7 +46,7 @@ const Standings = () => {
 
         const playerStats = playersStatsMap.get(playerId as string);
 
-        match.sets.map((set: any) => {
+        match.sets.forEach((set: any) => {
           if (set.player1 > set.player2 && player.set === "player1") {
             playerStats.won++;
           } else if (set.player2 > set.player1 && player.set === "player2") {
