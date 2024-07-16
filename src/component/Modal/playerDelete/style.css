@@ -14,10 +14,11 @@
   text-align: center;
 }
 
-.modal-delete-player__actions{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.modal-delete-player__actions {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .MuiButtonBase-root.btn-delete {
@@ -25,9 +26,9 @@
   border: 2px solid var(--red);
 }
 
-.MuiButtonBase-root.btn-delete:hover{
+.MuiButtonBase-root.btn-delete:hover {
   background-color: var(--red);
-  color:  var(--white);
+  color: var(--white);
 }
 
 .MuiButtonBase-root.btn-cancel {
@@ -35,7 +36,7 @@
   border: 2px solid var(--yellow);
 }
 
-.MuiButtonBase-root.btn-cancel:hover{
+.MuiButtonBase-root.btn-cancel:hover {
   background-color: var(--yellow);
   color: var(--white);
 }
