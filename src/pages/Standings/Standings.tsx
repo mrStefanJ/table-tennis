@@ -25,10 +25,10 @@ const Standings = () => {
     const matchesResponse = await featchMatchs();
     const matches = matchesResponse?.data;
     const playersStatsMap: Map<string, any> = new Map();
-    matches.forEach((match: Game) => {
+    matches.map((match: Game) => {
       const uniqueOpponents: Set<string> = new Set();
 
-      match.players.forEach((player: Player) => {
+      match.players.map((player: Player) => {
         const playerId = player.id;
         const playerName = `${player.firstName} ${player.lastName}`;
 
@@ -46,7 +46,7 @@ const Standings = () => {
 
         const playerStats = playersStatsMap.get(playerId as string);
 
-        match.sets.forEach((set: any) => {
+        match.sets.map((set: any) => {
           if (set.player1 > set.player2 && player.set === "player1") {
             playerStats.won++;
           } else if (set.player2 > set.player1 && player.set === "player2") {
@@ -89,7 +89,7 @@ const Standings = () => {
             <Table aria-label="simple table" className="result-table__table">
               <TableHead>
                 <TableRow>
-                  <TableCell className="sticky-column">Full Name</TableCell>
+                  <TableCell>Full Name</TableCell>
                   <TableCell>Played</TableCell>
                   <TableCell>Won in Set</TableCell>
                   <TableCell>Lost in Set</TableCell>
@@ -101,14 +101,14 @@ const Standings = () => {
               <TableBody>
                 {playersData.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={6}>The data is empty</TableCell>
+                    <TableCell colSpan={7} align="center">
+                      The data is empty
+                    </TableCell>
                   </TableRow>
                 ) : (
                   playersData.map((player: Match) => (
                     <TableRow key={player.id}>
-                      <TableCell className="sticky-column">
-                        {player.name}
-                      </TableCell>
+                      <TableCell>{player.name}</TableCell>
                       <TableCell>{player.played}</TableCell>
                       <TableCell>{player.won}</TableCell>
                       <TableCell>{player.lost}</TableCell>

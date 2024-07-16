@@ -82,87 +82,82 @@ const PlayerList = () => {
             )}
           </div>
         </div>
-        {loading ? (
-          "Loading..."
-        ) : (
-          <>
-            <TableContainer component={Paper}>
-              <Table aria-label="simple table" className="table-player">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>First Name</TableCell>
-                    <TableCell>Last Name</TableCell>
-                    <TableCell>Action</TableCell>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table" className="table-player">
+            <TableHead>
+              <TableRow>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {players.length === 0 ? (
+                <TableCell colSpan={5} className="result-table__cell">
+                  The data of players are empty
+                </TableCell>
+              ) : (
+                (rowsPerPage > 0
+                  ? players.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                  : players
+                ).map((player: any) => (
+                  <TableRow key={player.id}>
+                    <TableCell component="th" scope="row">
+                      {player.firstName}
+                    </TableCell>
+                    <TableCell align="left">{player.lastName}</TableCell>
+                    <TableCell align="right" className="table-action">
+                      <Button
+                        onClick={openDeleteModal}
+                        className="players-list__btn delete"
+                      >
+                        Delete
+                      </Button>
+                      {openModalDelete && (
+                        <ModalDelete
+                          onClose={closeDeleteModal}
+                          playerId={player.id as string}
+                          fetchPlayers={fetchPlayers}
+                        />
+                      )}
+                      <Button
+                        key={player.id}
+                        href={`profile/${player.id}`}
+                        className="players-list__btn profile"
+                      >
+                        Profile
+                      </Button>
+                    </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {(rowsPerPage > 0
-                    ? players.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                    : players
-                  ).map((player) => (
-                    <TableRow key={player.id}>
-                      <TableCell component="th" scope="row">
-                        {player.firstName}
-                      </TableCell>
-                      <TableCell align="left">{player.lastName}</TableCell>
-                      <TableCell align="right" className="table-action">
-                        <Button
-                          onClick={openDeleteModal}
-                          className="players-list__btn delete"
-                        >
-                          Delete
-                        </Button>
-                        {openModalDelete && (
-                          <ModalDelete
-                            onClose={closeDeleteModal}
-                            playerId={player.id as string}
-                            fetchPlayers={fetchPlayers}
-                          />
-                        )}
-                        <Button
-                          key={player.id}
-                          href={`profile/${player.id}`}
-                          className="players-list__btn profile"
-                        >
-                          Profile
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-                <TableFooter>
-                  <TableRow>
-                    <TablePagination
-                      rowsPerPageOptions={[
-                        5,
-                        10,
-                        25,
-                        { label: "All", value: -1 },
-                      ]}
-                      colSpan={3}
-                      count={players.length}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      slotProps={{
-                        select: {
-                          inputProps: {
-                            "aria-label": "rows per page",
-                          },
-                          native: true,
-                        },
-                      }}
-                      onPageChange={handleChangePage}
-                      onRowsPerPageChange={handleChangeRowsPerPage}
-                    />
-                  </TableRow>
-                </TableFooter>
-              </Table>
-            </TableContainer>
-          </>
-        )}
+                ))
+              )}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                  colSpan={3}
+                  count={players.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  slotProps={{
+                    select: {
+                      inputProps: {
+                        "aria-label": "rows per page",
+                      },
+                      native: true,
+                    },
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );

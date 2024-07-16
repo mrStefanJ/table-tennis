@@ -65,11 +65,16 @@ const ResultTable = () => {
                 label="Match"
                 onChange={handleChange}
               >
-                {data.map((match: Game) => (
-                  <MenuItem value={match.id} key={match.id}>
-                    {match.players[0].firstName} VS {match.players[1].firstName}
-                  </MenuItem>
-                ))}
+                {data.length === 0 ? (
+                  <MenuItem disabled>There are NO matches</MenuItem>
+                ) : (
+                  data.map((match: Game) => (
+                    <MenuItem value={match.id} key={match.id}>
+                      {match.players[0].firstName} VS{" "}
+                      {match.players[1].firstName}
+                    </MenuItem>
+                  ))
+                )}
               </Select>
             </FormControl>
           </Box>

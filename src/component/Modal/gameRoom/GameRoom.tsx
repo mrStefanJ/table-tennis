@@ -89,14 +89,14 @@ const GameRoom = ({
                   <TableCell key={`set${index}`}>
                     <TextField
                       value={matchData.sets[index].player1}
-                      label={`Player 1 - Set ${index + 1}`}
+                      label="Player 1"
                       className="modal-room__input-size"
                       type="number"
                       onChange={handleValues(index, "player1")}
                     />
                     <TextField
                       value={matchData.sets[index].player2}
-                      label={`Player 2 - Set ${index + 1}`}
+                      label="Player 2"
                       className="modal-room__input-size"
                       type="number"
                       onChange={handleValues(index, "player2")}

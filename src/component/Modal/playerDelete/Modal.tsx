@@ -16,6 +16,7 @@ const ModalDelete = ({
     fetchPlayers();
     onClose();
   };
+
   return (
     <Modal open>
       <Box className="modal-delete-player">

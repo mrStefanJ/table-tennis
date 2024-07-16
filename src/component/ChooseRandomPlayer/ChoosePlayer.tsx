@@ -15,7 +15,7 @@ const ChoosePlayer = () => {
 
   useEffect(() => {
     fetchPlayers();
-  }, []);
+  }, [players, randomPlayers]);
 
   const fetchPlayers = async () => {
     const data = await getPlayers();
@@ -55,7 +55,7 @@ const ChoosePlayer = () => {
       <div className="random-players">
         <Button
           onClick={pickRandomPlayers}
-          disabled={loading || players.length < 2}
+          disabled={loading || players.length <= 2}
           className="btn btn--pick"
         >
           {loading ? "Loading..." : "Pick Random Players"}

@@ -15,6 +15,7 @@
 }
 
 .random-players__title {
+  margin: 10px 0;
   color: var(--balck);
 }
 
