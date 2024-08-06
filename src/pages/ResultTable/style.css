@@ -4,7 +4,7 @@
   padding: 10px 5px;
 }
 
-.table-container{
+.table-container {
   background: var(--white);
   width: 100%;
 }
@@ -68,9 +68,10 @@
 
 .MuiPaper-root .MuiTableContainer-root {
   width: 326px;
+}
 
-  @media only screen and (min-width: 340px) {
+@media only screen and (min-width: 340px) {
+  .MuiPaper-root .MuiTableContainer-root {
     width: 400px;
   }
 }
-

@@ -30,13 +30,16 @@
   color: var(--white);
 }
 
+.cell--action.MuiTableCell-root{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .players-list {
   width: 100%;
-  @media only screen and (min-width: 720px) {
-    width: 520px;
-  }
-  
 }
+
 .player-list .image img {
   width: 10%;
   height: 20%;
@@ -46,16 +49,14 @@
   min-height: 420px;
 }
 
-.table-player{
-width: 100px;
+.table-player {
+  width: 100px;
 }
 
-
-td,
-th {
+td.MuiTableCell-root,
+th.MuiTableCell-root {
   border: 1px solid var(--grey);
   text-align: left;
-  padding: 8px;
 }
 
 .players-list__btn {
@@ -66,10 +67,11 @@ th {
 }
 
 .profile {
-  padding: 5px 10px;
+  padding: 2px 10px;
   color: var(--yellow);
   border: 2px solid var(--yellow);
   text-transform: capitalize;
+  text-align: center;
 }
 
 .profile:hover {
@@ -83,13 +85,24 @@ th {
   color: var(--red);
   border: 2px solid var(--red);
   text-transform: capitalize;
-
-  @media only screen and (min-width: 375px){
-    margin: 0 5px;
-  }
 }
 
 .MuiButton-root.delete:hover {
   background-color: var(--red);
   color: var(--white);
+}
+
+@media only screen and (min-width: 375px) {
+  .MuiButton-root.delete {
+    margin: 0 5px;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .players-list {
+    width: 520px;
+  }
+  .MuiButton-root.delete {
+    padding: 2px 0;
+  }
 }

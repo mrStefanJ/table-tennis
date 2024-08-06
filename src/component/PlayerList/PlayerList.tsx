@@ -108,7 +108,7 @@ const PlayerList = () => {
                       {player.firstName}
                     </TableCell>
                     <TableCell align="left">{player.lastName}</TableCell>
-                    <TableCell align="right">
+                    <TableCell className="cell--action">
                       <Button
                         onClick={openDeleteModal}
                         className="players-list__btn delete"
