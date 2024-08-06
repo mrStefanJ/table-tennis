@@ -1,6 +1,6 @@
 @import url("../../style/variable.css");
 
-.container-standing {
+.standing__container {
   background: var(--white);
 }
 
@@ -54,12 +54,38 @@
   overflow-x: hidden;
 }
 
+.standing__buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.standing__buttons .MuiButton-root {
+  margin: 0 5px;
+  text-transform: capitalize;
+  border: 2px solid var(--blue);
+  background: var(--white);
+  color: var(--blue);
+}
+
+.standing__buttons .MuiButton-root:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.standing__buttons .MuiButton-root.active {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--dark-blue);
+}
 
 .MuiPaper-root .result__table-container {
   overflow-x: auto;
   width: 100%;
-  @media only screen and (min-width: 576px) {
-    
+}
+
+@media only screen and (min-width: 576px) {
+  .MuiPaper-root .result__table-container {
     overflow: hidden;
   }
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { featchMatchs } from "../../jasonData/data";
+import { featchMatchs, getPlayers } from "../../jasonData/data";
 import {
+  Box,
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -16,10 +18,19 @@ import { Game, Match, Player } from "../../jasonData/type";
 
 const Standings = () => {
   const [playersData, setPlayersData] = useState<Match[]>([]);
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [filter, setFilter] = useState<string>("all");
+  const [activeButton, setActiveButton] = useState<string>("all");
 
   useEffect(() => {
     fetchMatchData();
+    fetchPlayers();
   }, []);
+
+  const fetchPlayers = async () => {
+    const data = await getPlayers();
+    setPlayers(data);
+  };
 
   const fetchMatchData = async () => {
     const matchesResponse = await featchMatchs();
@@ -77,13 +88,55 @@ const Standings = () => {
     setPlayersData(playersStatsArray);
   };
 
+  const checkPlayerActive = (playerId: string) => {
+    return players.some((player) => player.id === playerId);
+  };
+
+  const handleFilterChange = (filter: string) => {
+    setFilter(filter);
+    setActiveButton(filter);
+  };
+
+  const filteredPlayersData = playersData.filter((player) => {
+    if (filter === "all") {
+      return true;
+    }
+    if (filter === "active") {
+      return checkPlayerActive(player.id);
+    }
+    if (filter === "deactive") {
+      return !checkPlayerActive(player.id);
+    }
+    return true;
+  });
+
   return (
     <>
-      <div className="container-standing">
+      <div className="standing__container">
         <Link to="/" className="standing__btn-back">
           Back
         </Link>
         <h2 className="standing__title">Standings Result</h2>
+        <Box className="standing__buttons">
+          <Button
+            onClick={() => handleFilterChange("all")}
+            className={activeButton === "all" ? "active" : ""}
+          >
+            All
+          </Button>
+          <Button
+            onClick={() => handleFilterChange("active")}
+            className={activeButton === "active" ? "active" : ""}
+          >
+            Active
+          </Button>
+          <Button
+            onClick={() => handleFilterChange("deactive")}
+            className={activeButton === "deactive" ? "active" : ""}
+          >
+            Deactive
+          </Button>
+        </Box>
         <Paper sx={{ width: "100%" }}>
           <TableContainer className="result__table-container">
             <Table aria-label="simple table" className="result-table__table">
@@ -95,18 +148,19 @@ const Standings = () => {
                   <TableCell>Lost in Set</TableCell>
                   <TableCell>Point Won</TableCell>
                   <TableCell>Point Lost</TableCell>
-                  <TableCell>POINTS</TableCell>
+                  <TableCell>Points</TableCell>
+                  <TableCell>Active</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {playersData.length === 0 ? (
+                {filteredPlayersData.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={7} align="center">
                       The data is empty
                     </TableCell>
                   </TableRow>
                 ) : (
-                  playersData.map((player: Match) => (
+                  filteredPlayersData.map((player: Match) => (
                     <TableRow key={player.id}>
                       <TableCell>{player.name}</TableCell>
                       <TableCell>{player.played}</TableCell>
@@ -115,6 +169,9 @@ const Standings = () => {
                       <TableCell>{player.pointsWon}</TableCell>
                       <TableCell>{player.pointsLost}</TableCell>
                       <TableCell>{player.won * 3}</TableCell>
+                      <TableCell>
+                        {checkPlayerActive(player.id) ? "Yes" : "No"}
+                      </TableCell>
                     </TableRow>
                   ))
                 )}
