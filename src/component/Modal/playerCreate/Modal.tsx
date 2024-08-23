@@ -64,7 +64,7 @@ const ModalCreate = ({
 
       await addPlayer(playerWithDefaultImage);
       setNewPlayer({
-        id: Date.now(),
+        id: Date.now().toString(),
         firstName: "",
         lastName: "",
         image: "",

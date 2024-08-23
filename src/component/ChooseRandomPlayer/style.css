@@ -46,6 +46,10 @@
   background: var(--blue);
 }
 
+.MuiButton-root.Mui-disabled {
+  border: 2px solid var(--grey-dark);
+}
+
 .image--deafult {
   width: 100%;
 }

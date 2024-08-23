@@ -79,9 +79,9 @@
   border-color: var(--dark-blue);
 }
 
-.MuiPaper-root .result__table-container {
-  overflow-x: auto;
-  width: 100%;
+.MuiPaper-root .result__table-container.MuiTableContainer-root {
+  padding: 5px 10px 10px 5px;
+  width: auto!important; 
 }
 
 @media only screen and (min-width: 576px) {

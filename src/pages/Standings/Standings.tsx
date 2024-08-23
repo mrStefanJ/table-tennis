@@ -16,8 +16,10 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { Game, Match, Player } from "../../jasonData/type";
 
+type FilterType = "all" | "active" | "deactive";
+
 const Standings = () => {
-  const [playersData, setPlayersData] = useState<Match[]>([]);
+  const [playersData, setPlayersData] = useState<any[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
   const [filter, setFilter] = useState<string>("all");
   const [activeButton, setActiveButton] = useState<string>("all");
@@ -97,19 +99,22 @@ const Standings = () => {
     setActiveButton(filter);
   };
 
-  const filteredPlayersData = playersData.filter((player) => {
-    if (filter === "all") {
-      return true;
-    }
-    if (filter === "active") {
-      return checkPlayerActive(player.id);
-    }
-    if (filter === "deactive") {
-      return !checkPlayerActive(player.id);
-    }
-    return true;
-  });
+  const filterFunctions = {
+    all: () => true,
+    active: (player: Player) => checkPlayerActive(player.id),
+    deactive: (player: Player) => !checkPlayerActive(player.id),
+  };
 
+  function getFilterFunction(filter: string): (player: Player) => boolean {
+    if (filter in filterFunctions) {
+      return filterFunctions[filter as FilterType];
+    }
+    return filterFunctions.all;
+  }
+
+  const filteredPlayersData = playersData.filter(getFilterFunction(filter));
+
+  console.log(playersData);
   return (
     <>
       <div className="standing__container">
@@ -155,8 +160,10 @@ const Standings = () => {
               <TableBody>
                 {filteredPlayersData.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} align="center">
-                      The data is empty
+                    <TableCell colSpan={8} align="center">
+                      {filter === "deactive"
+                        ? "There are no players that are deactivated"
+                        : "The date is emepty"}
                     </TableCell>
                   </TableRow>
                 ) : (

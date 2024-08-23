@@ -4,9 +4,9 @@
   padding: 10px 5px;
 }
 
-.table-container {
+.container {
+  padding: 10px;
   background: var(--white);
-  width: 100%;
 }
 
 .result-table__heading {
@@ -68,6 +68,11 @@
 
 .MuiPaper-root .MuiTableContainer-root {
   width: 326px;
+}
+
+.result-table .MuiTableContainer-root {
+  width: auto!important; 
+  padding: 5px;
 }
 
 @media only screen and (min-width: 340px) {
