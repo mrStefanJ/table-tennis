@@ -93,7 +93,7 @@ const PlayerList = () => {
             <TableBody>
               {players.length === 0 ? (
                 <TableCell colSpan={5} className="result-table__cell">
-                  The data of players are empty
+                  There are no data of players
                 </TableCell>
               ) : (
                 (rowsPerPage > 0

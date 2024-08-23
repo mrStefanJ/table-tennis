@@ -16,7 +16,7 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { Game, Match, Player } from "../../jasonData/type";
 
-type FilterType = "all" | "active" | "deactive";
+type FilterType = "all" | "active" | "retired";
 
 const Standings = () => {
   const [playersData, setPlayersData] = useState<any[]>([]);
@@ -102,7 +102,7 @@ const Standings = () => {
   const filterFunctions = {
     all: () => true,
     active: (player: Player) => checkPlayerActive(player.id),
-    deactive: (player: Player) => !checkPlayerActive(player.id),
+    retired: (player: Player) => !checkPlayerActive(player.id),
   };
 
   function getFilterFunction(filter: string): (player: Player) => boolean {
@@ -136,10 +136,10 @@ const Standings = () => {
             Active
           </Button>
           <Button
-            onClick={() => handleFilterChange("deactive")}
-            className={activeButton === "deactive" ? "active" : ""}
+            onClick={() => handleFilterChange("retired")}
+            className={activeButton === "retired" ? "active" : ""}
           >
-            Deactive
+            Retired
           </Button>
         </Box>
         <Paper sx={{ width: "100%" }}>
@@ -161,8 +161,8 @@ const Standings = () => {
                 {filteredPlayersData.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={8} align="center">
-                      {filter === "deactive"
-                        ? "There are no players that are deactivated"
+                      {filter === "retired"
+                        ? "There are no information about players who have retired from the game"
                         : "The date is emepty"}
                     </TableCell>
                   </TableRow>
