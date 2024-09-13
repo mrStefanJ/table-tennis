@@ -1,7 +1,3 @@
-import { Link } from "react-router-dom";
-import "./style.css";
-import { useEffect, useState } from "react";
-import { featchMatchByID, featchMatchs } from "../../jasonData/data";
 import {
   Box,
   FormControl,
@@ -16,8 +12,12 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Game, Set } from "../../jasonData/type";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Footer } from "../../component/Footer";
+import { featchMatchByID, featchMatchs } from "../../jasonData/data";
+import { Game, Set } from "../../jasonData/type";
+import "./style.css";
 
 const ResultTable = () => {
   const [data, setData] = useState<Game[]>([]);
@@ -46,7 +46,7 @@ const ResultTable = () => {
 
   return (
     <>
-      <div className="result-table-container">
+      <section className="result-table-container">
         <Box>
           <Link to="/" className="result-table__btn-back">
             Back
@@ -116,7 +116,7 @@ const ResultTable = () => {
             </Table>
           </TableContainer>
         </div>
-      </div>
+      </section>
       <Footer />
     </>
   );

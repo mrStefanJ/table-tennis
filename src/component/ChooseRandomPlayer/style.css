@@ -57,6 +57,17 @@
 .btn-modal {
   margin: 10px 0;
 }
+.btn--position-center{
+  display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn--position-center > button {
+  margin: 10px 10px;
+}
 
 @media only screen and (min-width: 720px) {
   .random-players__choosen {
@@ -70,4 +81,14 @@
     width: 60%;
     margin-top: 20px;
   }
+  .btn--position-center{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn--position-center > button {
+    margin: 0px 10px;
+  }
+  
 }

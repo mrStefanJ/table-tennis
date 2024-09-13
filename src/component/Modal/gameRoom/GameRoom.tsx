@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Box,
   Button,
@@ -11,9 +10,10 @@ import {
   TableRow,
   TextField,
 } from "@mui/material";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { saveMatch } from "../../../jasonData/data";
 import { Game, Player } from "../../../jasonData/type";
-import { v4 as uuidv4 } from "uuid";
 import "./style.css";
 
 const GameRoom = ({
@@ -72,6 +72,9 @@ const GameRoom = ({
     <Modal open aria-describedby="room-game" className="modal--position">
       <div className="modal-room">
         <h2 className="modal-room__title">Room</h2>
+        <p className="modal-room__title">
+          {player1.firstName} VS {player2.firstName}
+        </p>
         <TableContainer className="table-container">
           <Table sx={{ minWidth: 500 }} aria-label="simple table">
             <TableHead>

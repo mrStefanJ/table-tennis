@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { featchMatchs, getPlayers } from "../../jasonData/data";
 import {
   Box,
   Button,
@@ -11,10 +9,12 @@ import {
   TableRow,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import Footer from "../../component/Footer/Footer";
-import "./style.css";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Footer from "../../component/Footer/Footer";
+import { featchMatchs, getPlayers } from "../../jasonData/data";
 import { Game, Match, Player } from "../../jasonData/type";
+import "./style.css";
 
 type FilterType = "all" | "active" | "retired";
 
@@ -154,7 +154,7 @@ const Standings = () => {
                   <TableCell>Point Won</TableCell>
                   <TableCell>Point Lost</TableCell>
                   <TableCell>Points</TableCell>
-                  <TableCell>Active</TableCell>
+                  <TableCell>Retired</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -177,7 +177,7 @@ const Standings = () => {
                       <TableCell>{player.pointsLost}</TableCell>
                       <TableCell>{player.won * 3}</TableCell>
                       <TableCell>
-                        {checkPlayerActive(player.id) ? "Yes" : "No"}
+                        {checkPlayerActive(player.id) ? "No" : "Yes"}
                       </TableCell>
                     </TableRow>
                   ))

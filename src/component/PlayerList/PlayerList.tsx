@@ -1,7 +1,3 @@
-import { useState, useEffect, useRef } from "react";
-import { getPlayers } from "../../jasonData/data";
-import { Player } from "../../jasonData/type";
-import "./style.css";
 import {
   Box,
   Button,
@@ -15,9 +11,13 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { getPlayers } from "../../jasonData/data";
+import { Player } from "../../jasonData/type";
 import { ModalCreate } from "../Modal/playerCreate";
 import { ModalDelete } from "../Modal/playerDelete";
-import { Link } from "react-router-dom";
+import "./style.css";
 
 const PlayerList = () => {
   const [players, setPlayers] = useState<Player[]>([]);
@@ -47,7 +47,6 @@ const PlayerList = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -63,7 +62,7 @@ const PlayerList = () => {
   };
 
   return (
-    <div className="container">
+    <section className="container">
       <div className="players-list">
         <div className="players-list__header">
           <h2 className="players-list__title">Players</h2>
@@ -158,7 +157,7 @@ const PlayerList = () => {
           </Table>
         </TableContainer>
       </div>
-    </div>
+    </section>
   );
 };
 
