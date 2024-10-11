@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   FormControl,
   InputLabel,
@@ -28,7 +27,7 @@ const ChoosePlayer = () => {
 
   useEffect(() => {
     fetchPlayers(); // Fetch players only once when the component mounts
-  }, []);
+  }, [players]);
 
   const getPlayers = () => {
     try {

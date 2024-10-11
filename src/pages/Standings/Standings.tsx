@@ -24,9 +24,9 @@ const Standings = () => {
   const [activeButton, setActiveButton] = useState<string>("all");
 
   useEffect(() => {
-    fetchMatchData(); // Fetch match data on component mount
-    fetchPlayers(); // Fetch players on component mount
-  }, []);
+    fetchMatchData();
+    fetchPlayers();
+  }, [players, playersData]);
 
   console.log("PLayers", players);
 
