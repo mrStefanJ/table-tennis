@@ -7,11 +7,9 @@ import { PlayerList } from "./component/PlayerList";
 function App() {
   return (
     <div className="App">
-      <div className="App_background">
-        <Header />
-        <PlayerList />
-        <ChoosePlayer />
-      </div>
+      <Header />
+      <PlayerList />
+      <ChoosePlayer />
       <Footer />
     </div>
   );

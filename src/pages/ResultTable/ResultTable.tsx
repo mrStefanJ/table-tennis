@@ -15,33 +15,38 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Footer } from "../../component/Footer";
-import { featchMatchByID, featchMatchs } from "../../jasonData/data";
 import { Game, Set } from "../../jasonData/type";
 import "./style.css";
 
 const ResultTable = () => {
-  const [data, setData] = useState<Game[]>([]);
-  const [selectedMatch, setSelectedMatch] = useState<string>("");
-  const [selectedMatchData, setSelectedMatchData] = useState<Game | null>(null);
+  const [data, setData] = useState<Game[]>([]); // All matches
+  const [selectedMatch, setSelectedMatch] = useState<string>(""); // Selected match ID
+  const [selectedMatchData, setSelectedMatchData] = useState<Game | null>(null); // Selected match data
 
   useEffect(() => {
-    fetchMatches();
+    fetchMatches(); // Fetch matches on component mount
   }, []);
 
-  const fetchMatches = async () => {
-    const matchs = await featchMatchs();
-    setData(matchs!.data);
+  // Fetch all matches from localStorage
+  const fetchMatches = () => {
+    const storedMatches = localStorage.getItem("match");
+    if (storedMatches) {
+      const matches = JSON.parse(storedMatches) as Game[];
+      setData(matches); // Set the retrieved matches into state
+    }
   };
 
-  const fetchMatch = async (id: string) => {
-    const matchData = await featchMatchByID(id);
-    setSelectedMatchData(matchData || null);
+  // Fetch a specific match by ID from local state
+  const fetchMatch = (id: string) => {
+    const matchData = data.find((match) => match.id === id) || null;
+    setSelectedMatchData(matchData); // Set the selected match data into state
   };
 
+  // Handle match selection change
   const handleChange = (event: SelectChangeEvent) => {
     const selectedId = event.target.value as string;
-    setSelectedMatch(selectedId);
-    fetchMatch(selectedId);
+    setSelectedMatch(selectedId); // Set selected match ID
+    fetchMatch(selectedId); // Fetch the match data based on the selected ID
   };
 
   return (

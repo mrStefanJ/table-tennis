@@ -2,7 +2,6 @@ import { Box, Button, Modal, TextField } from "@mui/material";
 import { Player } from "../../../jasonData/type";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { addPlayer } from "../../../jasonData/data";
 import DefaultImage from "../../../assets/player-image.png";
 import "./style.css";
 import styled from "@emotion/styled";
@@ -62,14 +61,26 @@ const ModalCreate = ({
         image: newPlayer.image ? newPlayer.image : DefaultImage,
       };
 
-      await addPlayer(playerWithDefaultImage);
+      // Get the existing players from localStorage
+      const storedPlayers = localStorage.getItem("players");
+      const players = storedPlayers ? JSON.parse(storedPlayers) : [];
+
+      // Add the new player to the existing list
+      players.push(playerWithDefaultImage);
+
+      // Save the updated players list back to localStorage
+      localStorage.setItem("players", JSON.stringify(players));
+
+      // Reset the form
       setNewPlayer({
-        id: Date.now().toString(),
+        id: uuidv4(),
         firstName: "",
         lastName: "",
         image: "",
         title: "",
       });
+
+      // Fetch the updated players list
       fetchPlayers();
       closeCreaterModal();
     } catch (error) {
@@ -110,7 +121,6 @@ const ModalCreate = ({
                 value={newPlayer.firstName}
                 onChange={handleChange}
               />
-
               {firstNameError && (
                 <p className="modal-create__error-message">{firstNameError}</p>
               )}

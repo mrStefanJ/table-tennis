@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { saveMatch } from "../../../jasonData/data";
+// import { saveMatch } from "../../../jasonData/data";
 import { Game, Player } from "../../../jasonData/type";
 import "./style.css";
 
@@ -58,12 +58,21 @@ const GameRoom = ({
       }
     };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     try {
-      const response = await saveMatch(matchData);
-      console.log("Game data saved successfully: ", response);
+      // Retrieve existing matches from localStorage
+      const storedMatches = localStorage.getItem("match");
+      const existingMatches = storedMatches ? JSON.parse(storedMatches) : [];
+
+      // Add the new match to the list of existing matches
+      const updatedMatches = [...existingMatches, matchData];
+
+      // Save the updated list back to localStorage
+      localStorage.setItem("match", JSON.stringify(updatedMatches));
+
+      console.log("Game data saved successfully in localStorage.");
     } catch (error) {
-      console.error("Error saving game data:", error);
+      console.error("Error saving game data to localStorage:", error);
     }
     closeModal();
   };

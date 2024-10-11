@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { selectedPlayer } from "../../jasonData/data";
+// import { selectedPlayer } from "../../jasonData/data";
 import { useEffect, useState } from "react";
 import { Player } from "../../jasonData/type";
 import "./style.css";
@@ -14,14 +14,26 @@ const Profile = () => {
 
   useEffect(() => {
     fetchData();
-  }, [player]); // eslint-disable-line
+  }, [player?.id]); // eslint-disable-line
 
-  const fetchData = async () => {
+  const fetchData = () => {
     try {
-      const data = await selectedPlayer(params.playerId as string);
-      setPlayer(data);
+      const storedPlayers = localStorage.getItem("players");
+      if (storedPlayers) {
+        const players = JSON.parse(storedPlayers);
+        const selectedPlayer = players.find(
+          (player: Player) => player.id === params.playerId
+        );
+        if (selectedPlayer) {
+          setPlayer(selectedPlayer);
+        } else {
+          console.error("Player not found");
+        }
+      } else {
+        console.error("No players data in localStorage");
+      }
     } catch (error) {
-      console.error("Error fetching player data: ", error);
+      console.error("Error fetching player data from localStorage: ", error);
     }
   };
 

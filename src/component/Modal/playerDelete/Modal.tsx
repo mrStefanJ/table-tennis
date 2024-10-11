@@ -1,6 +1,6 @@
 import { Box, Button, Modal } from "@mui/material";
 import "./style.css";
-import { deletePlayer } from "../../../jasonData/data";
+// import { deletePlayer } from "../../../jasonData/data";
 
 const ModalDelete = ({
   onClose,
@@ -11,6 +11,21 @@ const ModalDelete = ({
   playerId: string;
   fetchPlayers: () => void;
 }) => {
+  const deletePlayer = (id: string) => {
+    try {
+      const storedPlayers = localStorage.getItem("players");
+      if (storedPlayers) {
+        const players = JSON.parse(storedPlayers);
+        const updatedPlayers = players.filter(
+          (player: any) => player.id !== id
+        ); // Filter out the player by ID
+        localStorage.setItem("players", JSON.stringify(updatedPlayers)); // Update localStorage
+      }
+    } catch (error) {
+      console.error("Error deleting player:", error);
+    }
+  };
+
   const handleDeleteItem = async (id: string) => {
     await deletePlayer(id);
     fetchPlayers();

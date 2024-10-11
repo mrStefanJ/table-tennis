@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { getPlayers } from "../../jasonData/data";
+// import { getPlayers } from "../../jasonData/data";
 import { Player } from "../../jasonData/type";
 import { ModalCreate } from "../Modal/playerCreate";
 import { ModalDelete } from "../Modal/playerDelete";
@@ -29,13 +29,28 @@ const PlayerList = () => {
     if (!initialized.current) {
       initialized.current = true;
 
-      fetchPlayers();
+      const playersData = getPlayers();
+      setPlayers(playersData);
     }
   }, []);
 
   const fetchPlayers = async () => {
-    const data = await getPlayers();
-    setPlayers(data);
+    const playersData = getPlayers();
+    setPlayers(playersData);
+  };
+
+  const getPlayers = () => {
+    try {
+      const storedPlayers = localStorage.getItem("players");
+      if (storedPlayers) {
+        return JSON.parse(storedPlayers);
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching players from localStorage:", error);
+      return [];
+    }
   };
 
   const openCreaterModal = () => setOpenModal(true);

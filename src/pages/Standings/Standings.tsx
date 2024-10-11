@@ -12,8 +12,7 @@ import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
-import { featchMatchs, getPlayers } from "../../jasonData/data";
-import { Game, Match, Player } from "../../jasonData/type";
+import { Game, Player } from "../../jasonData/type";
 import "./style.css";
 
 type FilterType = "all" | "active" | "retired";
@@ -25,75 +24,121 @@ const Standings = () => {
   const [activeButton, setActiveButton] = useState<string>("all");
 
   useEffect(() => {
-    fetchMatchData();
-    fetchPlayers();
+    fetchMatchData(); // Fetch match data on component mount
+    fetchPlayers(); // Fetch players on component mount
   }, []);
 
+  console.log("PLayers", players);
+
+  // Fetch all players from localStorage
+  const getPlayers = () => {
+    try {
+      const storedPlayers = localStorage.getItem("players");
+      if (storedPlayers) {
+        return JSON.parse(storedPlayers);
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching players from localStorage:", error);
+      return [];
+    }
+  };
+
+  // Set players into state
   const fetchPlayers = async () => {
     const data = await getPlayers();
+    console.log("Players fetched from localStorage:", data); // Debugging
     setPlayers(data);
   };
-
+  // Fetch all matches from localStorage and calculate player stats
   const fetchMatchData = async () => {
-    const matchesResponse = await featchMatchs();
-    const matches = matchesResponse?.data;
-    const playersStatsMap: Map<string, any> = new Map();
-    matches.forEach((match: Game) => {
-      const uniqueOpponents: Set<string> = new Set();
+    try {
+      const storedMatches = localStorage.getItem("matches");
+      console.log("Stored matches:", storedMatches); // Debug log to check if matches are stored
 
-      match.players.forEach((player: Player) => {
-        const playerId = player.id;
-        const playerName = `${player.firstName} ${player.lastName}`;
+      if (storedMatches) {
+        const matches = JSON.parse(storedMatches) as Game[];
+        console.log("Matches parsed from storage:", matches); // Debug log to check the parsed matches
 
-        if (!playersStatsMap.has(playerId as string)) {
-          playersStatsMap.set(playerId as string, {
-            id: playerId,
-            name: playerName,
-            played: 0,
-            won: 0,
-            lost: 0,
-            pointsWon: 0,
-            pointsLost: 0,
+        const playersStatsMap: Map<string, any> = new Map();
+
+        // Process each match
+        matches.forEach((match: Game) => {
+          match.players.forEach((player: Player) => {
+            const playerId = player.id;
+            const playerName = `${player.firstName} ${player.lastName}`;
+
+            // Debugging player stats
+            console.log("Processing player:", playerName, "with ID:", playerId);
+
+            // Initialize player stats if not already present
+            if (!playersStatsMap.has(playerId)) {
+              playersStatsMap.set(playerId, {
+                id: playerId,
+                name: playerName,
+                played: 0,
+                won: 0,
+                lost: 0,
+                pointsWon: 0,
+                pointsLost: 0,
+              });
+            }
+
+            const playerStats = playersStatsMap.get(playerId);
+
+            // Process match sets and update player stats
+            match.sets.forEach((set: any) => {
+              if (player.set === "player1") {
+                playerStats.pointsWon += set.player1;
+                playerStats.pointsLost += set.player2;
+                if (set.player1 > set.player2) {
+                  playerStats.won++;
+                } else {
+                  playerStats.lost++;
+                }
+              } else if (player.set === "player2") {
+                playerStats.pointsWon += set.player2;
+                playerStats.pointsLost += set.player1;
+                if (set.player2 > set.player1) {
+                  playerStats.won++;
+                } else {
+                  playerStats.lost++;
+                }
+              }
+            });
+
+            // Increment the number of games played
+            playerStats.played++;
           });
-        }
-
-        const playerStats = playersStatsMap.get(playerId as string);
-
-        match.sets.forEach((set: any) => {
-          if (set.player1 > set.player2 && player.set === "player1") {
-            playerStats.won++;
-          } else if (set.player2 > set.player1 && player.set === "player2") {
-            playerStats.won++;
-          } else if (set.player1 < set.player2 && player.set === "player1") {
-            playerStats.lost++;
-          } else if (set.player2 < set.player1 && player.set === "player2") {
-            playerStats.lost++;
-          }
-
-          playerStats.pointsWon +=
-            player.set === "player1" ? set.player1 : set.player2;
-          playerStats.pointsLost +=
-            player.set === "player1" ? set.player2 : set.player1;
         });
 
-        uniqueOpponents.add(playerId as string);
-      });
-
-      // Increment the played count for each player with the number of unique opponents
-      uniqueOpponents.forEach((opponentId: string) => {
-        const opponentStats = playersStatsMap.get(opponentId);
-        opponentStats.played += uniqueOpponents.size - 1; // Exclude the player himself
-      });
-    });
-
-    const playersStatsArray = Array.from(playersStatsMap.values());
-    setPlayersData(playersStatsArray);
+        // Convert map to array and set state
+        const playersStatsArray = Array.from(playersStatsMap.values());
+        console.log("Players stats array:", playersStatsArray); // Debugging
+        setPlayersData(playersStatsArray); // Set player data
+      } else {
+        console.log("No matches found in localStorage.");
+      }
+    } catch (error) {
+      console.error("Error fetching match data:", error);
+    }
   };
 
+  // Check if a player is active or retired
+  // Check if a player is active or retired
   const checkPlayerActive = (playerId: string) => {
-    return players.some((player) => player.id === playerId);
+    const isActive = players.some((player) => player.id === playerId);
+    console.log(
+      "Checking active status for player ID:",
+      playerId,
+      "Result:",
+      isActive
+    );
+    return isActive;
   };
 
+  // Handle filter change for active/retired players
   const handleFilterChange = (filter: string) => {
     setFilter(filter);
     setActiveButton(filter);
@@ -112,9 +157,12 @@ const Standings = () => {
     return filterFunctions.all;
   }
 
+  // Filter players data based on the selected filter
   const filteredPlayersData = playersData.filter(getFilterFunction(filter));
 
-  console.log(playersData);
+  console.log("Players:", players);
+  console.log("Filtered Players Data:", filteredPlayersData);
+
   return (
     <>
       <div className="standing__container">
@@ -151,8 +199,8 @@ const Standings = () => {
                   <TableCell>Played</TableCell>
                   <TableCell>Won in Set</TableCell>
                   <TableCell>Lost in Set</TableCell>
-                  <TableCell>Point Won</TableCell>
-                  <TableCell>Point Lost</TableCell>
+                  <TableCell>Points Won</TableCell>
+                  <TableCell>Points Lost</TableCell>
                   <TableCell>Points</TableCell>
                   <TableCell>Retired</TableCell>
                 </TableRow>
@@ -162,12 +210,12 @@ const Standings = () => {
                   <TableRow>
                     <TableCell colSpan={8} align="center">
                       {filter === "retired"
-                        ? "There are no information about players who have retired from the game"
-                        : "The date is emepty"}
+                        ? "There are no players who have retired."
+                        : "The data is empty."}
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredPlayersData.map((player: Match) => (
+                  filteredPlayersData.map((player: any) => (
                     <TableRow key={player.id}>
                       <TableCell>{player.name}</TableCell>
                       <TableCell>{player.played}</TableCell>

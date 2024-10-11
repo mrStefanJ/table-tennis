@@ -3,7 +3,7 @@ import "./style.css";
 
 const Header = () => {
   return (
-    <div className="nav">
+    <header className="nav">
       <Link to={"/"} className="nav__text">
         Home
       </Link>
@@ -13,7 +13,7 @@ const Header = () => {
       <Link to={"/standings"} className="nav__text">
         Standings
       </Link>
-    </div>
+    </header>
   );
 };
 

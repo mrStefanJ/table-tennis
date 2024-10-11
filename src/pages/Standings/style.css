@@ -1,12 +1,12 @@
 @import url("../../style/variable.css");
 
 .standing__container {
-  background: var(--white);
+  background: transparent;
 }
 
 .standing__btn-back {
   margin: 10px;
-  color: var(--black);
+  color: var(--white);
   position: relative;
   display: inline-block;
   text-decoration: none;
@@ -44,7 +44,7 @@
 .standing__title {
   margin: 10px 0;
   padding-left: 10px;
-  color: var(--black);
+  color: var(--white);
   font-weight: bold;
 }
 

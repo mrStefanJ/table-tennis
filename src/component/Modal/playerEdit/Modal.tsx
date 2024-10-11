@@ -1,6 +1,5 @@
 import { Box, Button, Modal, TextField } from "@mui/material";
 import { useState } from "react";
-import { editPlayer } from "../../../jasonData/data";
 import { Player } from "../../../jasonData/type";
 import styled from "@emotion/styled";
 import "./style.css";
@@ -58,8 +57,25 @@ const ModalEdit = ({
 
   const handleEdit = async () => {
     try {
-      await editPlayer(player.id as string, editedPlayer);
-      handleClose();
+      // Retrieve the existing players from localStorage
+      const storedPlayers = localStorage.getItem("players");
+      if (storedPlayers) {
+        // Parse the players array
+        const players: Player[] = JSON.parse(storedPlayers);
+
+        // Find the player to update
+        const updatedPlayers = players.map((p) =>
+          p.id === player.id ? { ...p, ...editedPlayer } : p
+        );
+
+        // Save the updated players list back to localStorage
+        localStorage.setItem("players", JSON.stringify(updatedPlayers));
+
+        // Close the modal after updating
+        handleClose();
+      } else {
+        console.error("No players found in localStorage.");
+      }
     } catch (error) {
       console.error("Error editing player: ", error);
     }

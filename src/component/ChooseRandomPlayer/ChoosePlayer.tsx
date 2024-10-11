@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import GameRoom from "../../component/Modal/gameRoom/GameRoom";
-import { getPlayers } from "../../jasonData/data";
 import { Player } from "../../jasonData/type";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import "./style.css";
@@ -23,25 +22,39 @@ const ChoosePlayer = () => {
   const [loading, setLoading] = useState(false);
   const [displaySection, setDisplaySection] = useState<
     "random" | "manual" | null
-  >(null); // State to track which section to display
+  >(null);
   const [manualPlayerOne, setManualPlayerOne] = useState<string>("");
   const [manualPlayerTwo, setManualPlayerTwo] = useState<string>("");
 
   useEffect(() => {
-    fetchPlayers();
-  }, [players, randomPlayers]);
+    fetchPlayers(); // Fetch players only once when the component mounts
+  }, []);
 
-  const fetchPlayers = async () => {
-    const data = await getPlayers();
+  const getPlayers = () => {
+    try {
+      const storedPlayers = localStorage.getItem("players");
+      if (storedPlayers) {
+        return JSON.parse(storedPlayers);
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching players from localStorage:", error);
+      return [];
+    }
+  };
+
+  const fetchPlayers = () => {
+    const data = getPlayers();
     setPlayers(data);
   };
 
   const pickRandomPlayers = () => {
     setLoading(true);
-    setManualPlayerOne(""); // Clear manual selections when switching modes
+    setManualPlayerOne("");
     setManualPlayerTwo("");
     setSelectedPlayers([]);
-    setDisplaySection("random"); // Show the random players section
+    setDisplaySection("random");
 
     let index1 = Math.floor(Math.random() * players.length);
     let index2 = Math.floor(Math.random() * players.length);
@@ -59,8 +72,8 @@ const ChoosePlayer = () => {
   };
 
   const pickManualPlayers = () => {
-    setRandomPlayers([]); // Clear random selections when switching modes
-    setDisplaySection("manual"); // Show the manual players section
+    setRandomPlayers([]);
+    setDisplaySection("manual");
   };
 
   const handleManualPlayerOneChange = (event: SelectChangeEvent) => {
@@ -93,7 +106,7 @@ const ChoosePlayer = () => {
     setModalOpen(false);
   };
 
-  // To prevent choosing the same player in both selects
+  // Filter players to avoid selecting the same player in both selects
   const filteredPlayersForSecondSelect = players.filter(
     (player) => player.id !== manualPlayerOne
   );
@@ -118,13 +131,15 @@ const ChoosePlayer = () => {
           </Button>
           {players.length <= 2 && (
             <Tooltip
-              title="Need to have more that two players to play game"
+              title="Need to have more than two players to play game"
               placement="top"
             >
               <InfoOutlinedIcon />
             </Tooltip>
           )}
         </div>
+
+        {/* Random players section */}
         {displaySection === "random" && randomPlayers.length > 0 && (
           <div className="pick__random-players">
             <h3 className="random-players__title">Randomly Picked Players</h3>
@@ -149,6 +164,8 @@ const ChoosePlayer = () => {
             </div>
           </div>
         )}
+
+        {/* Manual players section */}
         {displaySection === "manual" && (
           <div className="pick__manual-players">
             <h2>Manual</h2>
@@ -168,6 +185,7 @@ const ChoosePlayer = () => {
                 ))}
               </Select>
             </FormControl>
+
             <FormControl sx={{ m: 1, minWidth: 150 }}>
               <InputLabel id="player-two-select-label">Player Two</InputLabel>
               <Select
@@ -185,6 +203,7 @@ const ChoosePlayer = () => {
                 ))}
               </Select>
             </FormControl>
+
             <div className="btn-modal">
               <Button
                 className="btn"
@@ -196,16 +215,8 @@ const ChoosePlayer = () => {
             </div>
           </div>
         )}
-        {displaySection === null && (
-          <Box className="text">
-            {/* <img
-              src={Image}
-              alt="players and table-tennis"
-              className="image--default"
-            /> */}
-          </Box>
-        )}
       </div>
+
       {modalOpen && selectedPlayers.length > 0 && (
         <GameRoom players={selectedPlayers} closeModal={closeRoom} />
       )}
