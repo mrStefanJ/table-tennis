@@ -1,33 +1,38 @@
+import {
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
 import { Game, Player } from "../../jasonData/type";
 import "./style.css";
 
-// type FilterType = "all" | "active" | "retired";
+type FilterType = "all" | "active" | "retired";
 
 const Standings = () => {
-  const [playersData, setPlayersData] = useState<any[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
-  // const [filter, setFilter] = useState<string>("all");
-  // const [activeButton, setActiveButton] = useState<string>("all");
+  const [matchs, setMatchs] = useState<any[]>([]);
+  const [filter, setFilter] = useState<FilterType>("all");
+  const [activeButton, setActiveButton] = useState<FilterType>("all");
 
   useEffect(() => {
-    fetchMatchData();
-    fetchPlayers(); // eslint-disable-next-line
-  }, [players, playersData]);
-
-  console.log("PLayers", players);
+    fetchPlayers();
+    fetchMatchData(); // eslint-disable-next-line
+  }, []);
 
   // Fetch all players from localStorage
   const getPlayers = () => {
     try {
       const storedPlayers = localStorage.getItem("players");
-      if (storedPlayers) {
-        return JSON.parse(storedPlayers);
-      } else {
-        return [];
-      }
+      return storedPlayers ? JSON.parse(storedPlayers) : [];
     } catch (error) {
       console.error("Error fetching players from localStorage:", error);
       return [];
@@ -35,147 +40,112 @@ const Standings = () => {
   };
 
   // Set players into state
-  const fetchPlayers = async () => {
-    const data = await getPlayers();
-    console.log("Players fetched from localStorage:", data); // Debugging
+  const fetchPlayers = () => {
+    const data = getPlayers();
     setPlayers(data);
   };
+
   // Fetch all matches from localStorage and calculate player stats
-  const fetchMatchData = async () => {
+  const fetchMatchData = () => {
     try {
-      const storedMatches = localStorage.getItem("matches");
-      console.log("Stored matches:", storedMatches); // Debug log to check if matches are stored
-
-      if (storedMatches) {
-        const matches = JSON.parse(storedMatches) as Game[];
-        console.log("Matches parsed from storage:", matches); // Debug log to check the parsed matches
-
-        const playersStatsMap: Map<string, any> = new Map();
-
-        // Process each match
-        matches.forEach((match: Game) => {
-          match.players.forEach((player: Player) => {
-            const playerId = player.id;
-            const playerName = `${player.firstName} ${player.lastName}`;
-
-            // Debugging player stats
-            console.log("Processing player:", playerName, "with ID:", playerId);
-
-            // Initialize player stats if not already present
-            if (!playersStatsMap.has(playerId)) {
-              playersStatsMap.set(playerId, {
-                id: playerId,
-                name: playerName,
-                played: 0,
-                won: 0,
-                lost: 0,
-                pointsWon: 0,
-                pointsLost: 0,
-              });
-            }
-
-            const playerStats = playersStatsMap.get(playerId);
-
-            // Process match sets and update player stats
-            match.sets.forEach((set: any) => {
-              if (player.set === "player1") {
-                playerStats.pointsWon += set.player1;
-                playerStats.pointsLost += set.player2;
-                if (set.player1 > set.player2) {
-                  playerStats.won++;
-                } else {
-                  playerStats.lost++;
-                }
-              } else if (player.set === "player2") {
-                playerStats.pointsWon += set.player2;
-                playerStats.pointsLost += set.player1;
-                if (set.player2 > set.player1) {
-                  playerStats.won++;
-                } else {
-                  playerStats.lost++;
-                }
-              }
-            });
-
-            // Increment the number of games played
-            playerStats.played++;
-          });
-        });
-
-        // Convert map to array and set state
-        const playersStatsArray = Array.from(playersStatsMap.values());
-        console.log("Players stats array:", playersStatsArray); // Debugging
-        setPlayersData(playersStatsArray); // Set player data
-      } else {
+      const storedMatches = localStorage.getItem("match");
+      if (!storedMatches) {
         console.log("No matches found in localStorage.");
+        return;
       }
+
+      const matches = JSON.parse(storedMatches) as Game[];
+      const playersStatsMap: Map<string, any> = new Map();
+
+      // Process each match
+      matches.forEach((match: Game) => {
+        match.players.forEach((player: Player) => {
+          const playerId = player.id;
+          const playerName = `${player.firstName} ${player.lastName}`;
+
+          // Initialize player stats if not already present
+          if (!playersStatsMap.has(playerId)) {
+            playersStatsMap.set(playerId, {
+              id: playerId,
+              name: playerName,
+              played: 0,
+              won: 0,
+              lost: 0,
+              pointsWon: 0,
+              pointsLost: 0,
+            });
+          }
+
+          const playerStats = playersStatsMap.get(playerId);
+
+          // Process match sets and update player stats
+          match.sets.forEach((set: any) => {
+            if (player.set === "player1") {
+              playerStats.pointsWon += set.player1;
+              playerStats.pointsLost += set.player2;
+              playerStats.won += set.player1 > set.player2 ? 1 : 0;
+              playerStats.lost += set.player1 <= set.player2 ? 1 : 0;
+            } else if (player.set === "player2") {
+              playerStats.pointsWon += set.player2;
+              playerStats.pointsLost += set.player1;
+              playerStats.won += set.player2 > set.player1 ? 1 : 0;
+              playerStats.lost += set.player2 <= set.player1 ? 1 : 0;
+            }
+          });
+
+          // Increment the number of games played
+          playerStats.played++;
+        });
+      });
+
+      // Convert map to array and set state
+      const playersStatsArray = Array.from(playersStatsMap.values());
+      setMatchs(playersStatsArray);
     } catch (error) {
       console.error("Error fetching match data:", error);
     }
   };
 
   // Check if a player is active or retired
-  // const checkPlayerActive = (playerId: string) => {
-  //   const isActive = players.some((player) => player.id === playerId);
-  //   console.log(
-  //     "Checking active status for player ID:",
-  //     playerId,
-  //     "Result:",
-  //     isActive
-  //   );
-  //   return isActive;
-  // };
+  const checkPlayerActive = (playerId: string) => {
+    return players.some((player) => player.id === playerId);
+  };
 
   // Handle filter change for active/retired players
-  // const handleFilterChange = (filter: string) => {
-  //   setFilter(filter);
-  //   setActiveButton(filter);
-  // };
+  const handleFilterChange = (filter: FilterType) => {
+    setFilter(filter);
+    setActiveButton(filter);
+  };
 
-  // const filterFunctions = {
-  //   all: () => true,
-  //   active: (player: Player) => checkPlayerActive(player.id),
-  //   retired: (player: Player) => !checkPlayerActive(player.id),
-  // };
-
-  // function getFilterFunction(filter: string): (player: Player) => boolean {
-  //   if (filter in filterFunctions) {
-  //     return filterFunctions[filter as FilterType];
-  //   }
-  //   return filterFunctions.all;
-  // }
+  // Define filter functions
+  const filterFunctions: Record<FilterType, (player: Player) => boolean> = {
+    all: () => true,
+    active: (player) => checkPlayerActive(player.id),
+    retired: (player) => !checkPlayerActive(player.id),
+  };
 
   // Filter players data based on the selected filter
-  // const filteredPlayersData = playersData.filter(getFilterFunction(filter));
+  const filteredPlayersData = matchs.filter(filterFunctions[filter]);
 
   return (
     <>
-      <div className="standing__container">
+      <section className="standing__container">
         <Link to="/" className="standing__btn-back">
           Back
         </Link>
         <h2 className="standing__title">Standings Result</h2>
-        {/* <Box className="standing__buttons">
-          <Button
-            onClick={() => handleFilterChange("all")}
-            className={activeButton === "all" ? "active" : ""}
-          >
-            All
-          </Button>
-          <Button
-            onClick={() => handleFilterChange("active")}
-            className={activeButton === "active" ? "active" : ""}
-          >
-            Active
-          </Button>
-          <Button
-            onClick={() => handleFilterChange("retired")}
-            className={activeButton === "retired" ? "active" : ""}
-          >
-            Retired
-          </Button>
-        </Box> */}
-        {/* <Paper sx={{ width: "100%" }}>
+        <Box className="standing__buttons">
+          {(["all", "active", "retired"] as FilterType[]).map((type) => (
+            <Button
+              key={type}
+              onClick={() => handleFilterChange(type)}
+              className={activeButton === type ? "active" : ""}
+            >
+              {type.charAt(0).toUpperCase() + type.slice(1)}
+            </Button>
+          ))}
+        </Box>
+        <Paper sx={{ width: "100%" }}>
           <TableContainer className="result__table-container">
             <Table aria-label="simple table" className="result-table__table">
               <TableHead>
@@ -200,7 +170,7 @@ const Standings = () => {
                     </TableCell>
                   </TableRow>
                 ) : (
-                  filteredPlayersData.map((player: any) => (
+                  filteredPlayersData.map((player) => (
                     <TableRow key={player.id}>
                       <TableCell>{player.name}</TableCell>
                       <TableCell>{player.played}</TableCell>
@@ -218,8 +188,8 @@ const Standings = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </Paper> */}
-      </div>
+        </Paper>
+      </section>
       <Footer />
     </>
   );

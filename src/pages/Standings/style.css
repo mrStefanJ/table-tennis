@@ -2,6 +2,7 @@
 
 .standing__container {
   background: transparent;
+  height: 100vh;
 }
 
 .standing__btn-back {

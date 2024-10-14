@@ -27,7 +27,7 @@ const ChoosePlayer = () => {
 
   useEffect(() => {
     fetchPlayers(); // eslint-disable-next-line
-  }, [players]);
+  }, []);
 
   const getPlayers = () => {
     try {
@@ -111,11 +111,9 @@ const ChoosePlayer = () => {
   );
 
   return (
-    <div className="container-random-player">
+    <div className="random-player__container">
       <div className="random-players">
-        <div className="random-player__text">
-          Choose how you want to selected players
-        </div>
+        <h2 className="random-player__text">Choose players</h2>
         <div className="btn--position-center">
           <Button
             onClick={pickRandomPlayers}

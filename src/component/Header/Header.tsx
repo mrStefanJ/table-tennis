@@ -3,16 +3,16 @@ import "./style.css";
 
 const Header = () => {
   return (
-    <header className="nav">
+    <header className="header__nav">
       <Link to={"/"} className="nav__text">
         Home
       </Link>
       <Link to={"/result"} className="nav__text">
         Result
       </Link>
-      {/* <Link to={"/standings"} className="nav__text">
+      <Link to={"/standings"} className="nav__text">
         Standings
-      </Link> */}
+      </Link>
     </header>
   );
 };

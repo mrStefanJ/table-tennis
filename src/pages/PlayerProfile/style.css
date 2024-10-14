@@ -2,20 +2,21 @@
 
 .player__info {
   width: 720px;
-  height: auto;
-  background: var(--white);
+  height: 100vh;
+  background: transparent;
   padding-bottom: 30px;
 }
 
 .player-info__title {
   padding-left: 30px;
-  color: var(--blue);
+  color: var(--white);
   font-weight: bold;
 }
 
 .player-info__profile.MuiBox-root {
   text-align: left;
   padding-left: 30px;
+  color: var(--white);
 }
 
 .player-info__image {
@@ -33,11 +34,12 @@
 
 .player-info__btn-back {
   margin: 10px;
-  color: var(--black);
+  color: var(--white);
   position: relative;
   display: inline-block;
   text-decoration: none;
   transition: color 0.3s ease;
+  font-weight: bold;
 }
 
 .player-info__btn-back::before,

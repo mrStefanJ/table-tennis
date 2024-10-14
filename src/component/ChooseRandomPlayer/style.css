@@ -1,7 +1,7 @@
 @import url("../../style/variable.css");
 
-.container-random-player {
-  padding: 100px 0 171px;
+.random-player__container {
+  padding-top: 100px;
 }
 
 .random-players__choosen {
@@ -17,7 +17,7 @@
 }
 
 .random-player__text {
-  font-size: 14px;
+  font-size: 20px;
   color: var(--white);
   padding-bottom: 20px;
 }
@@ -28,7 +28,8 @@
 
 .choosen-player .player-name {
   padding-bottom: 10px;
-  font-size: 14px;
+  font-size: 16px;
+  color: var(--white);
 }
 
 .choosen-player .player-image {
@@ -59,6 +60,19 @@
 .pick__manual-players {
   padding-top: 20px;
   color: var(--white);
+}
+
+.pick__manual-players .MuiFormLabel-root {
+  color: rgb(9, 18, 133);
+  font-weight: bold;
+}
+
+.pick__manual-players .MuiFormControl-root .MuiSelect-select {
+  background: white;
+}
+
+.pick__manual-players .MuiFormControl-root .Mui-disabled {
+  cursor: no-drop;
 }
 
 .image--deafult {

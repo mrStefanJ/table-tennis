@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-// import { getPlayers } from "../../jasonData/data";
 import { Player } from "../../jasonData/type";
+import { ChoosePlayer } from "../ChooseRandomPlayer/index";
 import { ModalCreate } from "../Modal/playerCreate";
 import { ModalDelete } from "../Modal/playerDelete";
 import "./style.css";
@@ -77,7 +77,7 @@ const PlayerList = () => {
   };
 
   return (
-    <section className="container">
+    <section className="players__container">
       <div className="players-list">
         <div className="players-list__header">
           <h2 className="players-list__title">Players</h2>
@@ -106,9 +106,11 @@ const PlayerList = () => {
             </TableHead>
             <TableBody>
               {players.length === 0 ? (
-                <TableCell colSpan={5} className="result-table__cell">
-                  There are no data of players
-                </TableCell>
+                <TableRow>
+                  <TableCell colSpan={3} className="result-table__cell">
+                    There are no data of players
+                  </TableCell>
+                </TableRow>
               ) : (
                 (rowsPerPage > 0
                   ? players.slice(
@@ -172,6 +174,7 @@ const PlayerList = () => {
           </Table>
         </TableContainer>
       </div>
+      <ChoosePlayer />
     </section>
   );
 };
