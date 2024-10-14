@@ -1,5 +1,9 @@
 @import url("../../../style/variable.css");
 
+.MuiModal-root {
+  position: absolute !important;
+}
+
 .modal-edit__form {
   position: absolute;
   left: 3%;
