@@ -26,7 +26,7 @@ const ChoosePlayer = () => {
   const [manualPlayerTwo, setManualPlayerTwo] = useState<string>("");
 
   useEffect(() => {
-    fetchPlayers(); // Fetch players only once when the component mounts
+    fetchPlayers(); // eslint-disable-next-line
   }, [players]);
 
   const getPlayers = () => {
@@ -113,6 +113,9 @@ const ChoosePlayer = () => {
   return (
     <div className="container-random-player">
       <div className="random-players">
+        <div className="random-player__text">
+          Choose how you want to selected players
+        </div>
         <div className="btn--position-center">
           <Button
             onClick={pickRandomPlayers}
@@ -167,7 +170,7 @@ const ChoosePlayer = () => {
         {/* Manual players section */}
         {displaySection === "manual" && (
           <div className="pick__manual-players">
-            <h2>Manual</h2>
+            <h3>Manual</h3>
             <FormControl sx={{ m: 1, minWidth: 150 }}>
               <InputLabel id="player-one-select-label">Player One</InputLabel>
               <Select

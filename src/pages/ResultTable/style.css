@@ -4,21 +4,25 @@
   padding: 10px 5px;
 }
 
+.result-table-container {
+  height: 100vh;
+}
+
 .container {
   padding: 10px;
-  background: var(--white);
+  background: transparent;
 }
 
 .result-table__heading {
   margin: 10px 0;
   padding-left: 10px;
-  color: var(--black);
+  color: var(--white);
   font-weight: bold;
 }
 
 .result-table__btn-back {
   margin: 10px;
-  color: var(--black);
+  color: var(--white);
   position: relative;
   display: inline-block;
   text-decoration: none;
@@ -70,9 +74,14 @@
   width: 326px;
 }
 
+#select-match {
+  background: #fff;
+}
+
 .result-table .MuiTableContainer-root {
   width: auto!important; 
   padding: 5px;
+  background: var(--white);
 }
 
 @media only screen and (min-width: 340px) {

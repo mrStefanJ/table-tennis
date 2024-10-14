@@ -1,7 +1,7 @@
 @import url("../../style/variable.css");
 
 .container-random-player {
-  padding-top: 20px;
+  padding: 100px 0 171px;
 }
 
 .random-players__choosen {
@@ -13,7 +13,13 @@
 
 .random-players__title {
   margin: 10px 0;
-  color: var(--balck);
+  color: var(--white);
+}
+
+.random-player__text {
+  font-size: 14px;
+  color: var(--white);
+  padding-bottom: 20px;
 }
 
 .choosen-player {
@@ -50,6 +56,11 @@
   border: 2px solid var(--grey-dark);
 }
 
+.pick__manual-players {
+  padding-top: 20px;
+  color: var(--white);
+}
+
 .image--deafult {
   width: 100%;
 }
@@ -57,12 +68,13 @@
 .btn-modal {
   margin: 10px 0;
 }
-.btn--position-center{
+
+.btn--position-center {
   display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .btn--position-center > button {
@@ -81,7 +93,7 @@
     width: 60%;
     margin-top: 20px;
   }
-  .btn--position-center{
+  .btn--position-center {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
@@ -90,5 +102,4 @@
   .btn--position-center > button {
     margin: 0px 10px;
   }
-  
 }

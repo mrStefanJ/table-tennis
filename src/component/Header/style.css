@@ -5,6 +5,8 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: nowrap;
+    background-color: #fff;
+    width: auto;
 }
 
 .nav__text {

@@ -1,31 +1,20 @@
-import {
-  Box,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../component/Footer/Footer";
 import { Game, Player } from "../../jasonData/type";
 import "./style.css";
 
-type FilterType = "all" | "active" | "retired";
+// type FilterType = "all" | "active" | "retired";
 
 const Standings = () => {
   const [playersData, setPlayersData] = useState<any[]>([]);
   const [players, setPlayers] = useState<Player[]>([]);
-  const [filter, setFilter] = useState<string>("all");
-  const [activeButton, setActiveButton] = useState<string>("all");
+  // const [filter, setFilter] = useState<string>("all");
+  // const [activeButton, setActiveButton] = useState<string>("all");
 
   useEffect(() => {
     fetchMatchData();
-    fetchPlayers();
+    fetchPlayers(); // eslint-disable-next-line
   }, [players, playersData]);
 
   console.log("PLayers", players);
@@ -126,42 +115,38 @@ const Standings = () => {
   };
 
   // Check if a player is active or retired
-  // Check if a player is active or retired
-  const checkPlayerActive = (playerId: string) => {
-    const isActive = players.some((player) => player.id === playerId);
-    console.log(
-      "Checking active status for player ID:",
-      playerId,
-      "Result:",
-      isActive
-    );
-    return isActive;
-  };
+  // const checkPlayerActive = (playerId: string) => {
+  //   const isActive = players.some((player) => player.id === playerId);
+  //   console.log(
+  //     "Checking active status for player ID:",
+  //     playerId,
+  //     "Result:",
+  //     isActive
+  //   );
+  //   return isActive;
+  // };
 
   // Handle filter change for active/retired players
-  const handleFilterChange = (filter: string) => {
-    setFilter(filter);
-    setActiveButton(filter);
-  };
+  // const handleFilterChange = (filter: string) => {
+  //   setFilter(filter);
+  //   setActiveButton(filter);
+  // };
 
-  const filterFunctions = {
-    all: () => true,
-    active: (player: Player) => checkPlayerActive(player.id),
-    retired: (player: Player) => !checkPlayerActive(player.id),
-  };
+  // const filterFunctions = {
+  //   all: () => true,
+  //   active: (player: Player) => checkPlayerActive(player.id),
+  //   retired: (player: Player) => !checkPlayerActive(player.id),
+  // };
 
-  function getFilterFunction(filter: string): (player: Player) => boolean {
-    if (filter in filterFunctions) {
-      return filterFunctions[filter as FilterType];
-    }
-    return filterFunctions.all;
-  }
+  // function getFilterFunction(filter: string): (player: Player) => boolean {
+  //   if (filter in filterFunctions) {
+  //     return filterFunctions[filter as FilterType];
+  //   }
+  //   return filterFunctions.all;
+  // }
 
   // Filter players data based on the selected filter
-  const filteredPlayersData = playersData.filter(getFilterFunction(filter));
-
-  console.log("Players:", players);
-  console.log("Filtered Players Data:", filteredPlayersData);
+  // const filteredPlayersData = playersData.filter(getFilterFunction(filter));
 
   return (
     <>
@@ -170,7 +155,7 @@ const Standings = () => {
           Back
         </Link>
         <h2 className="standing__title">Standings Result</h2>
-        <Box className="standing__buttons">
+        {/* <Box className="standing__buttons">
           <Button
             onClick={() => handleFilterChange("all")}
             className={activeButton === "all" ? "active" : ""}
@@ -189,8 +174,8 @@ const Standings = () => {
           >
             Retired
           </Button>
-        </Box>
-        <Paper sx={{ width: "100%" }}>
+        </Box> */}
+        {/* <Paper sx={{ width: "100%" }}>
           <TableContainer className="result__table-container">
             <Table aria-label="simple table" className="result-table__table">
               <TableHead>
@@ -233,7 +218,7 @@ const Standings = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </Paper>
+        </Paper> */}
       </div>
       <Footer />
     </>

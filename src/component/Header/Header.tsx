@@ -10,9 +10,9 @@ const Header = () => {
       <Link to={"/result"} className="nav__text">
         Result
       </Link>
-      <Link to={"/standings"} className="nav__text">
+      {/* <Link to={"/standings"} className="nav__text">
         Standings
-      </Link>
+      </Link> */}
     </header>
   );
 };
